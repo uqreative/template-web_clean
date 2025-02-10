@@ -1,0 +1,101 @@
+@charset "utf-8";
+@import url('/css/font.css');
+@layer swiper, reset;
+
+/* 스크롤 */
+/* ::-webkit-scrollbar{ display: none; } */
+@media(prefers-reduced-motion:no-preference){
+    html{ scroll-behavior: smooth; }
+}
+
+:root{
+    --inr-narrow: 1400;
+    --inr: 1600;
+    --inr-wide: 1720;
+    --inr-width: .92;
+    --primary: #003071;
+    --placeholder-bg: #f4f8f6;
+    --black: #111;
+    --font-pre: 'Pretendard', 'Malgun Gothic', 'Dotum', 'Gulim', Sans-serif;
+    --font-pop: 'Poppins', 'Pretendard', 'Malgun Gothic', 'Dotum', 'Gulim', Sans-serif;
+    --font-mon: 'Montserrat', 'Pretendard', 'Malgun Gothic', 'Dotum', 'Gulim', Sans-serif;
+    --font-suit: 'SUIT', 'Pretendard', 'Malgun Gothic', 'Dotum', 'Gulim', Sans-serif;
+    --font-cinzel: 'Cinzel', 'Pretendard', 'Malgun Gothic', 'Dotum', 'Gulim', Sans-serif;
+    --fs60: clamp(28rem, calc(60 / var(--inr) * 100vw), 60rem);
+    --fs54: clamp(26rem, calc(54 / var(--inr) * 100vw), 54rem);
+    --fs50: clamp(26rem, calc(50 / var(--inr) * 100vw), 50rem);
+    --fs45: clamp(24rem, calc(45 / var(--inr) * 100vw), 45rem);
+    --fs42: clamp(24rem, calc(42 / var(--inr) * 100vw), 42rem);
+    --fs40: clamp(24rem, calc(40 / var(--inr) * 100vw), 40rem);
+    --fs35: clamp(24rem, calc(35 / var(--inr) * 100vw), 35rem);
+    --fs30: clamp(24rem, calc(30 / var(--inr) * 100vw), 30rem);
+    --fs28: clamp(22rem, calc(28 / var(--inr) * 100vw), 28rem);
+    --fs26: clamp(20rem, calc(26 / var(--inr) * 100vw), 26rem);
+    --fs25: clamp(20rem, calc(25 / var(--inr) * 100vw), 25rem);
+    --fs24: clamp(20rem, calc(24 / var(--inr) * 100vw), 24rem);
+    --fs22: clamp(20rem, calc(22 / var(--inr) * 100vw), 22rem);
+    --fs20: clamp(18rem, calc(20 / var(--inr) * 100vw), 20rem);
+}
+
+@layer reset{
+    *, *::before, *::after{ box-sizing: border-box; letter-spacing: -.01em; outline-color: var(--primary); }
+    :where(body, h1, h2, h3, h4, h5, h6, p, ul, ol, figure, dd){ margin:0; padding: 0; }
+    :where(input,textarea,button,select){ font: inherit; color: inherit; caret-color: var(--primary); }
+    a{ text-decoration: none; color: inherit; }
+    address, em{ font-style:normal; }
+    button{ padding: 0; background: 0; border: 0; cursor:pointer; }
+    caption, legend{ overflow:hidden; position: absolute; width: 0; height: 0; border: 0; }
+    dialog{ color: inherit; }
+    input{ margin: 0; }
+    summary::-webkit-details-marker{ display: none; }
+    svg:focus, svg *:focus{ outline:none; }
+    table{ border-spacing:0; border-collapse:collapse; }
+    textarea{ resize: none; }
+    ul,ol,li{list-style:none;}
+}
+body{ accent-color: var(--primary); font: 16rem/1.5 var(--font-pre); color:var(--black); overflow-wrap: break-word; word-break: keep-all; }
+
+/* 글자 크기 - clamp(각 영역의 최소, 기본, 최대 크기) */
+@media(min-width:1921px){
+    html{ font-size: clamp(0px, calc((100 / 1920) * 1vw), 500px ); }
+}
+@media(max-width:1920px) and (min-width:1280px){
+    html{ font-size: clamp(0px, calc((100 / (var(--inr) / var(--inr-width))) * 1vw), 1px ); }
+}
+@media(max-width:1279px) and (min-width:768px){
+    html{ font-size: clamp(0px, calc((100 / 768) * .75vw), 5px ); }
+}
+@media(max-width:767px){
+    html{ font-size: clamp(0px, calc((100 / 360) * .875vw), 5px ); }
+}
+
+/* 검색엔진 고려한 숨기기, 로고, 제목, 링크 등, 버튼은 aria-label과 title */
+.visually-hidden{ overflow: hidden; position: absolute; width: 0; height: 0; }
+
+/* 선택자 */
+::selection{ background: var(--primary); color: #fff; }
+
+/* 말줄임표 */
+.ellipsis{ overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; min-height: 1lh; white-space: normal; word-break: break-all; }
+.ellipsis.e2{ -webkit-line-clamp: 2; height: 2lh; }
+.ellipsis.e3{ -webkit-line-clamp: 3; height: 3lh; }
+
+/* show, hide */
+@media(min-width: 768px){
+    #wrap .show-mob{ display: none; }
+}
+@media(min-width: 1280px){
+    #wrap .show-tab{ display: none; }
+}
+@media(min-width:2561px){
+    #wrap .show-qhd{ display: none; }
+}
+@media(max-width:2560px){
+    #wrap .hide-qhd{ display: none; }
+}
+@media(max-width: 1279px){
+    #wrap .hide-tab{ display: none; }
+}
+@media(max-width: 767px){
+    #wrap .hide-mob{ display: none; }
+}
