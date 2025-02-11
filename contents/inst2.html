@@ -1,0 +1,165 @@
+<? include_once $_SERVER[DOCUMENT_ROOT] . "/head.php"; ?>
+<? include_once $_SERVER[DOCUMENT_ROOT] . "/inc/top.html"; ?>
+<? include_once $_SERVER[DOCUMENT_ROOT] . "/inc/header.html"; ?>
+<script type="text/javascript">
+	var page_id;
+	var business_account;
+	var next_page;
+	var limit = 12;
+	var token;
+
+	function set_page_id(txt){
+		page_id = txt;
+	}
+
+	function set_business_account(txt){
+		business_account = txt;
+	}
+	function set_next_page(txt){
+		next_page = txt;
+	}
+	
+	function set_token(txt){
+		token = txt;
+	}
+
+	function get_page_id(token){
+		
+		$.ajax({
+			type : "GET",
+			url : "https://graph.facebook.com/v3.2/me?access_token="+token,
+			async: false,
+			success : function(args) {
+				set_page_id(args.id);
+			}
+		});
+	}
+	
+	function get_business_account(page_id, token){
+		console.log("https://graph.facebook.com/v3.2/"+page_id+"?fields=instagram_business_account&access_token="+token);
+
+		$.ajax({
+			type : "GET",
+			//url :  "https://graph.facebook.com/v3.2/"+page_id+"?fields=instagram_business_account&access_token="+token,
+			url :  "https://graph.facebook.com/v3.2/"+page_id+"?fields=instagram_business_account&access_token="+token,
+				
+			async: false,
+			success : function(args) {
+				set_business_account(args.instagram_business_account.id);
+			}
+		});
+	}
+	
+	function get_contents_(url, limit, token){
+		get_page_id(token);
+		get_business_account(page_id, token);
+
+		if(!url){
+			var url = "https://graph.facebook.com/v3.2/"+business_account+"/media?fields=media_url,shortcode,caption,permalink,media_type,thumbnail_url&limit="+limit+"&access_token="+token;
+		} 
+
+		$.ajax({
+			type : "GET",
+			url : url,
+			success : function(args) {
+				var txt;
+				txt = "<ul class=\"columnList\">";
+
+				$(args.data).each(function(){
+
+					if(this.caption == undefined){
+						this.caption = "";
+					}
+
+					txt += "<li>";
+					txt += "<a href=\""+this.permalink+"\" target=\"_blank\">";
+
+					if(this.media_type == "VIDEO"){
+						txt += "<span class=\"img\"><img src=\""+this.thumbnail_url+"\" alt=\"\"></span>";
+					} else {
+						txt += "<span class=\"img\"><img src=\""+this.media_url+"\" alt=\"\"></span>";
+					}
+					txt += "<p>"+this.caption+"</p>";
+					txt += "</a>";
+					txt += "</li>";
+				});
+
+				txt += "</ul>";
+				$("[data-load-instagram]").append(txt);
+
+				if(args.paging.next != undefined){
+					set_next_page(args.paging.next);
+					set_token(token);
+				} else {
+					set_next_page(undefined);
+				}
+			}
+		});
+	}
+
+
+ /* 영구토큰 가져오기 */
+	function get_everlasting_token(id, token){
+		$.ajax({
+			type : "GET",
+			url : "https://graph.facebook.com/v3.2/"+id+"?fields=access_token&access_token="+token,
+			success : function(args) {
+				//get_page_id(token);
+				//가져올때만 주석풀기
+				//console.log(token);
+			}
+		});
+	}
+
+	function get_everlasting_id(token){
+		$.ajax({
+			type : "GET",
+			url : "https://graph.facebook.com/v3.2/me?access_token="+token,
+			success : function(args) {
+				get_everlasting_token(args.id, token);
+			}
+		});
+	}
+
+	function get_longlived_token(app_id, app_secret, token){
+		$.ajax({
+			type : "GET",
+			url : "https://graph.facebook.com/v3.2/oauth/access_token?grant_type=fb_exchange_token&client_id="+app_id+"&client_secret="+app_secret+"&fb_exchange_token="+token,
+			success : function(args) {
+				get_everlasting_id(args.access_token);
+			}
+		});
+	}
+
+	//영구토큰 가져오기 EX	(앱 아이디, 앱 시크릿번호, 앱 단기토큰 넣은다음에 get_everlasting_id 의 console.log 확인하면 영구토큰)
+	//get_longlived_token("1121206548345934", "fc246ae34f871014cf5446ba383056da", "EAAP7uz4ItE4BAAt1TRZBfe8JdCjZC4BPbIsym8lShtOoLy7ohMK3nbZBzajZA0OSjKBO0mrNSoF7ddIa6xFGRXSVTWZCtwQGv5RxsjbqXxfNWjzVtJPy99tGuZAoYfWKx6Wef3ZBbOFl5m9AaJGH52mjDCW5hKu8JIcMoYXFWbTDLIAFtnZCd2PYk2RdNZCV3an1G8h9vmCNbbAZDZD");
+	/* 영구토큰 가져오기 끝 */
+
+	get_contents_("", limit, "EAAFfuWXWVm4BADxjTrqAc4PG8ZBiZB5Cn1NUM5yfZBwXRsiYXAtuuxg2LaKnqVgjTrizZC45GXXLWsyhwsgfOSeLXHXAQqgHKSygP0Wa3b8ZC7My9UiWe8kqY5XDZCB3S5J1jv2eAutv5LmkYiwUXdPKSERpFZBmw9GWHIqaPPMGwZDZD");
+
+
+	$(function(){
+		$("[data-more-instagram]").click(function(){
+			if(next_page != undefined){
+				get_contents_(next_page, limit, token); 
+			}
+
+		});
+	});
+</script>
+<!--
+	1. 관리자에 영구토큰 뽑는 메뉴 하나 만들고,
+	2. 사이트관리에 영구토큰 넣어놓고,
+	3. 그걸로 php
+	4. 타임라인으로....... count는 10으로 고정하고, 
+-->
+
+
+<!-- 목록9개노출 더보기 클릭시 추가노출 새로고침 없이 -->
+<div data-load-instagram>
+</div>
+<div class="btn_area">
+	<a href="javascript:void(0);" class="button lg" data-more-instagram><span>More</span></a>
+</div>
+
+<? include("../../inc/footer.html") ?>

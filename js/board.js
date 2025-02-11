@@ -19,18 +19,18 @@ $(document).ready(function() {
 $(function() {
   $( ".datepicker" ).datepicker({
     dateFormat: 'yy-mm-dd',
-    prevText: 'ì´ì „ ë‹¬',
-    nextText: 'ë‹¤ìŒ ë‹¬',
-    monthNames: ['1ì›”','2ì›”','3ì›”','4ì›”','5ì›”','6ì›”','7ì›”','8ì›”','9ì›”','10ì›”','11ì›”','12ì›”'],
-    monthNamesShort: ['1ì›”','2ì›”','3ì›”','4ì›”','5ì›”','6ì›”','7ì›”','8ì›”','9ì›”','10ì›”','11ì›”','12ì›”'],
-    dayNames: ['ì¼','ì›”','í™”','ìˆ˜','ëª©','ê¸ˆ','í† '],
-    dayNamesShort: ['ì¼','ì›”','í™”','ìˆ˜','ëª©','ê¸ˆ','í† '],
-    dayNamesMin: ['ì¼','ì›”','í™”','ìˆ˜','ëª©','ê¸ˆ','í† '],
+    prevText: '이전 달',
+    nextText: '다음 달',
+    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+    dayNames: ['일','월','화','수','목','금','토'],
+    dayNamesShort: ['일','월','화','수','목','금','토'],
+    dayNamesMin: ['일','월','화','수','목','금','토'],
     showMonthAfterYear: true,
     changeMonth: true,
     changeYear: true,
 	showOn: "both",
-	buttonText: "ë‹¬ë ¥ë³´ê¸°",
+	buttonText: "달력보기",
   });
 });
 
@@ -40,12 +40,12 @@ function sms_send() {
 	var phone_tmp3 = $("input[name='phone3']").val();
 
 	if( phone_tmp1 == "" || phone_tmp2 == "" || phone_tmp3 == "" ){
-		alert("íœ´ëŒ€í°ë²ˆí˜¸ë¥¼ ì˜¬ë°”ë¥´ê²Œ ìž…ë ¥í•´ì£¼ì„¸ìš”.");
+		alert("휴대폰번호를 올바르게 입력해주세요.");
 		return false;
 	}
 
 	if( phone_tmp1.length != 3 || phone_tmp2.length != 4 || phone_tmp3.length != 4 ){
-		alert("íœ´ëŒ€í°ë²ˆí˜¸ë¥¼ ì˜¬ë°”ë¥´ê²Œ ìž…ë ¥í•´ì£¼ì„¸ìš”.");
+		alert("휴대폰번호를 올바르게 입력해주세요.");
 		return false;
 	}
 
@@ -67,7 +67,7 @@ function sms_auth() {
 	var sms_auth = $("input[name='sms_auth']").val();
 
 	if( sms_auth == ""){
-		alert("ì¸ì¦ë²ˆí˜¸ë¥¼ ì˜¬ë°”ë¥´ê²Œ ìž…ë ¥í•´ì£¼ì„¸ìš”.");
+		alert("인증번호를 올바르게 입력해주세요.");
 		return false;
 	}
 
@@ -76,12 +76,12 @@ function sms_auth() {
 	var phone_tmp3 = $("input[name='phone3']").val();
 
 	if( phone_tmp1 == "" || phone_tmp2 == "" || phone_tmp3 == "" ){
-		alert("íœ´ëŒ€í°ë²ˆí˜¸ë¥¼ ì˜¬ë°”ë¥´ê²Œ ìž…ë ¥í•´ì£¼ì„¸ìš”.");
+		alert("휴대폰번호를 올바르게 입력해주세요.");
 		return false;
 	}
 
 	if( phone_tmp1.length != 3 || phone_tmp2.length != 4 || phone_tmp3.length != 4 ){
-		alert("íœ´ëŒ€í°ë²ˆí˜¸ë¥¼ ì˜¬ë°”ë¥´ê²Œ ìž…ë ¥í•´ì£¼ì„¸ìš”.");
+		alert("휴대폰번호를 올바르게 입력해주세요.");
 		return false;
 	}
 
@@ -109,10 +109,10 @@ $(document).ready(function() {
 	$('form').submit(function() {
 		var chk = true;
 
-		//ì…€ë ‰íŠ¸ ì²´í¬
+		//셀렉트 체크
 		$('.required_select').each(function() {
 			if (!$(this).val()) {			
-				alert($(this).attr('title') + "ì„ ì„ íƒí•˜ì„¸ìš”.");
+				alert($(this).attr('title') + "을 선택하세요.");
 				$(this).focus();
 				chk = false;
 				return false;
@@ -120,11 +120,11 @@ $(document).ready(function() {
 		});
 		if (!chk) { return false; }
 		
-		// ë¼ë””ì˜¤ ë²„íŠ¼ ì²´í¬
+		// 라디오 버튼 체크
 		$('.required_radio').each(function() {
 		/*
 			if (!$(this).find('input:radio:checked').length) {			
-				alert($(this).attr('title') + "ì„ ì„ íƒí•˜ì„¸ìš”.");
+				alert($(this).attr('title') + "을 선택하세요.");
 				$(this).find('input:radio').first().focus();
 				chk = false;
 				return false;
@@ -133,7 +133,7 @@ $(document).ready(function() {
 			var radio_name = $(this).attr("name");
 		
 			if(!$("input[type=radio][name="+radio_name+"]").is(":checked")){
-				alert($(this).attr('title') + "ì„ ì„ íƒí•˜ì„¸ìš”.");
+				alert($(this).attr('title') + "을 선택하세요.");
 				//$(this).find('input:radio').first().focus();
 				$("input[type=radio][name="+radio_name+"]").focus();
 				chk = false;
@@ -143,28 +143,28 @@ $(document).ready(function() {
 		});
 		if (!chk) { return false; }
 			
-		// ì²´í¬ë°•ìŠ¤ ë²„íŠ¼ ì²´í¬
+		// 체크박스 버튼 체크
 		$('.required_checkbox').each(function() {
 		
-			// ìµœì†Œ í•œê°œ ì„ íƒ
+			// 최소 한개 선택
 			if (!$(this).find('input:checkbox:checked').length) {			
-				alert($(this).attr('title') + "ì„ ì„ íƒí•˜ì„¸ìš”.");
+				alert($(this).attr('title') + "을 선택하세요.");
 				$(this).find('input:checkbox').first().focus();
 				chk = false;
 				return false;
 			}
 
-			// ìµœëŒ€ ì„ íƒ
+			// 최대 선택
 			if ($(this).find('input:checkbox:checked').length > $(this).attr('limit')) {			
-				alert($(this).attr('title') + "ëŠ” " + $(this).attr('limit') + "ê°œê¹Œì§€ ì„ íƒì´ ê°€ëŠ¥í•©ë‹ˆë‹¤.");
+				alert($(this).attr('title') + "는 " + $(this).attr('limit') + "개까지 선택이 가능합니다.");
 				$(this).find('input:checkbox').first().focus();
 				chk = false;
 				return false;
 			}
 			/*
-			// í•„ìˆ˜ ì„ íƒ ìˆ˜ ì ìš©
+			// 필수 선택 수 적용
 			if ($(this).find('input:checkbox:checked').length != $(this).attr('limit')) {			
-				alert($(this).attr('title') + "ëŠ” " + $(this).attr('limit') + "ê°œê¹Œì§€ ì„ íƒí•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
+				alert($(this).attr('title') + "는 " + $(this).attr('limit') + "개까지 선택하셔야 합니다.");
 				$(this).find('input:checkbox').first().focus();
 				chk = false;
 				return false;
@@ -177,7 +177,7 @@ $(document).ready(function() {
 
 		$('.required').each(function() {
 			if (!$(this).val()) {			
-				alert($(this).attr('title') + "ì„ ìž…ë ¥í•˜ì„¸ìš”.");
+				alert($(this).attr('title') + "을 입력하세요.");
 				$(this).focus();
 				chk = false;
 				return false;
@@ -190,7 +190,7 @@ $(document).ready(function() {
 		if("<?=$board[sms_auth]?>" == "Y" && "<?=$mode?>" != "modify"){
 			$('.auth_required').each(function() {
 				if ($(this).val() != "Y") {			
-					alert("ì¸ì¦ì„ ì§„í–‰í•´ì£¼ì„¸ìš”.");
+					alert("인증을 진행해주세요.");
 					chk = false;
 					return false;
 				}
@@ -202,7 +202,7 @@ $(document).ready(function() {
 
 });
 
-/* ì „ì²´ê°€ ë‹¤ë˜ê¸°ë•Œë¬¸ì— ì£¼ì„í•¨ - khh 240613
+/* 전체가 다되기때문에 주석함 - khh 240613
 $(document).on('click', 'a[href="#"]', function(e){
 	e.preventDefault();
 });
@@ -232,7 +232,7 @@ $(function(){
 		var chk = true; 
 
 		if($("#"+"re_comment_name_"+idx).val() == "") {
-			alert("ì´ë¦„ì„ ìž‘ì„±í•˜ì„¸ìš”");
+			alert("이름을 작성하세요");
 			chk = false;
 			return false;
 		}
@@ -240,14 +240,14 @@ $(function(){
 
 
 		if($("#"+"re_comment_pw_"+idx).val() == "") {
-			alert("ë¹„ë°€ë²ˆí˜¸ë¥¼ ìž‘ì„±í•˜ì„¸ìš”");
+			alert("비밀번호를 작성하세요");
 			chk = false;
 			return false;
 		}
 		if (!chk) { return false; }
 
 		if($("#"+"re_comment_text_"+idx).val() == "") {
-			alert("ë‚´ìš©ì„ ìž‘ì„±í•˜ì„¸ìš”");
+			alert("내용을 작성하세요");
 			chk = false;
 			return false;
 		}
@@ -260,7 +260,7 @@ $(document).ready(function() {
 	var chk = true;
 	$(".comment_del_form").submit(function() {
 		if($(this).children("input[type=password]").val() == ""){
-			alert($(this).children('input[type=password]').attr('title')+"ì„ ìž…ë ¥í•˜ì„¸ìš”");
+			alert($(this).children('input[type=password]').attr('title')+"을 입력하세요");
 			chk = false;
 			return false;
 		}
@@ -269,7 +269,7 @@ $(document).ready(function() {
 
 	$(".comment_append_form").submit(function() {
 		if($(this).children("input[type=password]").val() == ""){
-			alert($(this).children('input[type=password]').attr('title')+"ì„ ìž…ë ¥í•˜ì„¸ìš”");
+			alert($(this).children('input[type=password]').attr('title')+"을 입력하세요");
 			chk = false;
 			return false;
 		}
@@ -279,21 +279,21 @@ $(document).ready(function() {
 	$(".comment_write").submit(function() {
 
 		if($(this).children("input[type=comm_name]").val() == ""){
-			alert($(this).children('input[type=comm_name]').attr('title')+"ì„ ìž…ë ¥í•˜ì„¸ìš”");
+			alert($(this).children('input[type=comm_name]').attr('title')+"을 입력하세요");
 			chk = false;
 			return false;
 		}
 		if (!chk) { return false; }
  
 		if($(this).children("input[type=comm_password]").val() == ""){
-			alert($(this).children('input[type=comm_password]').attr('title')+"ì„ ìž…ë ¥í•˜ì„¸ìš”");
+			alert($(this).children('input[type=comm_password]').attr('title')+"을 입력하세요");
 			chk = false;
 			return false;
 		}
 		if (!chk) { return false; }
 
 		if($(this).children("textarea[type=comm_comments]").val() == ""){
-			alert($(this).children('textarea[type=comm_comments]').attr('title')+"ì„ ìž…ë ¥í•˜ì„¸ìš”");
+			alert($(this).children('textarea[type=comm_comments]').attr('title')+"을 입력하세요");
 			chk = false;
 			return false;
 		}

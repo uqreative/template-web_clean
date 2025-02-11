@@ -1,0 +1,95 @@
+<? include $_SERVER['DOCUMENT_ROOT'] . "/head.php"; ?>
+<? include $_SERVER['DOCUMENT_ROOT'] . "/inc/top.html"; ?>
+<? include $_SERVER['DOCUMENT_ROOT'] . "/inc/header.html"; ?>
+
+
+
+
+<!-- 준비중 삭제하고 작업하세요. -->
+<!-- <? include $_SERVER['DOCUMENT_ROOT'] . "/inc/inc_ready.html"; ?> -->
+<div class="inr">
+    <div class="content_wrap">
+        <div class="title-group">
+            <p class="eng" lang="en" data-gnb-title="eng">&nbsp;</p>
+            <p class="title" data-gnb-title="1">&nbsp;</p>
+        </div>
+        <div class="area_subTab">
+            <ul class="tab_button">
+                <li><a href="/contents/01_about/sub01.html" class="common-more">인사말</a></li>
+                <li class="on"><a href="/contents/01_about/sub02.html" class="common-more">오시는 길</a></li>
+            </ul>
+        </div>
+        <section id="about02">
+            <!-- <div class="img_about">
+            <img src="/images/content/visual-3.jpg" alt="인사말">
+          </div> -->
+            <div class="inr wrap_about">
+                <div class="direction">
+                    <div class="direction_title">
+                        <strong> 
+                            <figure>
+                                <img src="/images/content/icon-office.svg" alt="">
+                            </figure>
+                            부산·경남 사이트
+                        </strong> 
+                    </div>
+                    <section class="location">
+                        <div class="map-group">
+                            <div id="daumRoughmapContainer1735540811315"
+                                class="root_daum_roughmap root_daum_roughmap_landing map">
+                            </div>
+                            <div class="info">
+                                <p class="address">경상남도 양산시 물금읍 부산대학로 49, 첨단의생명융합센터동 4층 401호(부산대학교양산캠퍼스)</p>
+                                <p class="tel">TEL 055-381-7680</p>
+                            </div>
+                        </div>
+                    </section>
+                </div> 
+                <div class="direction">
+                    <div class="direction_title">
+                        <strong> 
+                            <figure>
+                                <img src="/images/content/icon-office.svg" alt="">
+                            </figure>
+                            서울·경기 사이트
+                        </strong> 
+                    </div>
+                    <section class="location">
+                        <div class="map-group">
+                            <div id="daumRoughmapContainer1735550123517" class="root_daum_roughmap root_daum_roughmap_landing map"></div>
+                            <div class="info">
+                                <p class="address">경기도 이천시 마장면 서이천로578번길 74</p>
+                                <p class="tel">TEL 031-645-7786</p>
+                            </div>
+                        </div>
+                    </section>
+                </div> 
+            </div>
+        </section>
+    </div>
+</div>
+
+<script class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        contentMapBusan();
+        contentMapSeoul();
+    });
+
+    function contentMapBusan() {
+        new daum.roughmap.Lander({
+            "timestamp": "1735540811315",
+            "key": "2mno4",
+        }).render();
+    }
+    function contentMapSeoul() {
+        new daum.roughmap.Lander({
+            "timestamp": "1735550123517",
+            "key": "2mnqk",
+        }).render();
+    }
+</script>
+
+<? include("inc_control.html") ?>
+<? include $_SERVER['DOCUMENT_ROOT'] . "/inc/footer.html"; ?>

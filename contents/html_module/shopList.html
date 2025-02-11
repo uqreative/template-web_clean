@@ -1,0 +1,112 @@
+<? include("../../inc/top.html") ?>
+<? include("../../inc/header.html") ?>
+
+	<!-- 좌우배치 -->
+	<div class="box_double shop">
+		<!-- map -->
+		<div class="map">
+			<div class="nation">
+				<!-- 지도에서 지역선택하고 검색시 a태그 class on 추가 -->
+				<a href="#" data-map="01">서울</a>
+				<a href="#" data-map="02" class="on">인천</a>
+				<a href="#" data-map="03">경기</a>
+				<a href="#" data-map="04">대전</a>
+				<a href="#" data-map="05">충남</a>
+				<a href="#" data-map="06">충북</a>
+				<a href="#" data-map="07">강원</a>
+				<a href="#" data-map="08">광주</a>
+				<a href="#" data-map="09">전남</a>
+				<a href="#" data-map="10">전북</a>
+				<a href="#" data-map="11">대구</a>
+				<a href="#" data-map="12">경북</a>
+				<a href="#" data-map="13">경남</a>
+				<a href="#" data-map="14">울산</a>
+				<a href="#" data-map="15">부산</a>
+			</div>
+			<div class="jeju">
+				<a href="#" data-map="16">제주</a>
+			</div>
+		</div>
+		<!-- //tree -->
+		
+		<!-- 검색 -->
+		<div class="search">
+			<em><i>전국 KO매장</i>을 검색해 보실 수 있습니다.</em>
+			<p>지도에 해당 지역을 클릭하시거나 지역명 또는 매장명을 입력해 주세요.</p>
+			
+			<div class="form">
+				<input type="text" name="" id="" placeholder="검색어를 입력하세요."/>
+				<input type="submit" name="" id="" class="button" value="검색"/>
+			</div>
+		</div>
+		<!-- //검색 -->
+	</div>
+	
+	<!-- 검색결과 -->
+	<table class="bbsList">
+		<caption>매장찾기 목록</caption>
+		<colgroup>
+			<col data-shop="area" style="width:15%"/>
+			<col data-shop="name"/>
+			<col data-shop="address" style="width:25%"/>
+			<col data-shop="tel" style="width:20%"/>
+		</colgroup>
+		<thead>
+			<tr>
+				<th scope="col" data-shop="number">지역</th>
+				<th scope="col" data-shop="name">매장명</th>
+				<th scope="col" data-shop="address">주소</th>
+				<th scope="col" data-shop="tel">전화번호</th>
+				<th scope="col" data-shop="view">View</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- 반복 -->
+			<tr>
+				<td data-shop="area">서울</td>
+				<td data-shop="name">KO매장서울점</td>
+				<td data-shop="address">대구광역시 수성구 동대구로12안길 10 136호</td>
+				<td data-shop="tel">070-8633-7466</td>
+				<td data-shop="view"><a href="#" class="button sm white">자세히보기</a></td>
+			</tr>
+			<!-- //반복 -->
+			<tr>
+				<td data-shop="area">서울</td>
+				<td data-shop="name">KO매장서울점</td>
+				<td data-shop="address">대구광역시 수성구 동대구로12안길 10 136호</td>
+				<td data-shop="tel">070-8633-7466</td>
+				<td data-shop="view"><a href="#" class="button sm white">자세히보기</a></td>
+			</tr>
+			<tr>
+				<td data-shop="area">서울</td>
+				<td data-shop="name">KO매장서울점</td>
+				<td data-shop="address">대구광역시 수성구 동대구로12안길 10 136호</td>
+				<td data-shop="tel">070-8633-7466</td>
+				<td data-shop="view"><a href="#" class="button sm white">자세히보기</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<!-- //검색결과 -->
+
+	<!-- page -->
+	<div class="pagination">
+		<a href="#" class="btn_first">맨처음</a>
+		<a href="#" class="btn_prev">이전</a>
+		<!-- 선택된페이지 -->
+		<span>1</span>
+		<!-- //선택된페이지 -->
+		<a href="#">2</a>
+		<a href="#">3</a>
+		<a href="#">4</a>
+		<a href="#">5</a>
+		<a href="#">6</a>
+		<a href="#">7</a>
+		<a href="#">8</a>
+		<a href="#">9</a>
+		<a href="#">10</a>
+		<a href="#" class="btn_next">다음</a>
+		<a href="#" class="btn_last">맨마지막</a>
+	</div>
+	<!-- //page -->
+
+<? include("../../inc/footer.html") ?>

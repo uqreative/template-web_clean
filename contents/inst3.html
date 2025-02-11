@@ -1,0 +1,312 @@
+<? include_once $_SERVER[DOCUMENT_ROOT] . "/head.php"; ?>
+<? include_once $_SERVER[DOCUMENT_ROOT] . "/inc/top.html"; ?>
+<? include_once $_SERVER[DOCUMENT_ROOT] . "/inc/header.html"; ?>
+<script type="text/javascript">
+	var page_id;
+	var business_account;
+	var next_page;
+	var limit = 6;
+	var token;
+
+	function set_page_id(txt){
+		page_id = txt;
+	}
+
+	function set_business_account(txt){
+		business_account = txt;
+	}
+	function set_next_page(txt){
+		next_page = txt;
+	}
+	
+	function set_token(txt){
+		token = txt;
+	}
+
+	function get_page_id(token){
+		$.ajax({
+			type : "GET",
+			url : "https://graph.facebook.com/v3.2/me/accounts?access_token="+token,
+			async: false,
+			success : function(args) {
+				set_page_id(args.data[0].id);
+			}
+		});
+	}
+	
+	function get_business_account(page_id, token){
+		$.ajax({
+			type : "GET",
+			url :  "https://graph.facebook.com/v3.2/"+page_id+"?fields=instagram_business_account&access_token="+token,
+			async: false,
+			success : function(args) {
+				set_business_account(args.instagram_business_account.id);
+			}
+		});
+	}
+	
+	function get_contents_(url, limit, token){
+		get_page_id(token);
+		get_business_account(page_id, token);
+		if(!url){
+			var url = "https://graph.facebook.com/v3.2/"+business_account+"/media?fields=media_url,shortcode,caption,permalink,media_type,thumbnail_url&limit="+limit+"&access_token="+token;
+		} 
+		//alert(url);
+
+		$.ajax({
+			type : "GET",
+			url : url,
+			success : function(args) {
+				var txt;
+				txt = "<ul class=\"columnList\">";
+
+				$(args.data).each(function(){
+
+					if(this.caption == undefined){
+						this.caption = "";
+					}
+
+					txt += "<li>";
+					txt += "<a href=\""+this.permalink+"\" target=\"_blank\">";
+
+					if(this.media_type == "VIDEO"){
+						txt += "<span class=\"img\"><img src=\""+this.thumbnail_url+"\" alt=\"\"></span>";
+					} else {
+						txt += "<span class=\"img\"><img src=\""+this.media_url+"\" alt=\"\"></span>";
+					}
+					txt += "<p>"+this.caption+"</p>";
+					txt += "</a>";
+					txt += "</li>";
+				});
+
+				txt += "</ul>";
+				$("[data-load-instagram]").append(txt);
+
+				if(args.paging.next != undefined){
+					set_next_page(args.paging.next);
+					set_token(token);
+				} else {
+					set_next_page(undefined);
+				}
+			}
+		});
+	}
+
+
+ /* 영구토큰 가져오기 */
+	function get_everlasting_token(id, token){
+		$.ajax({
+			type : "GET",
+			url : "https://graph.facebook.com/v3.2/"+id+"/accounts?access_token="+token,
+			success : function(args) {
+				//get_page_id(token);
+			}
+		});
+	}
+
+	function get_everlasting_id(token){
+		$.ajax({
+			type : "GET",
+			url : "https://graph.facebook.com/v3.2/me?access_token="+token,
+			success : function(args) {
+				//get_everlasting_token(args.id, token);
+				console.log(token);
+
+			}
+		});
+	}
+
+	function get_longlived_token(app_id, app_secret, token){
+		$.ajax({
+			type : "GET",
+			url : "https://graph.facebook.com/v3.2/oauth/access_token?grant_type=fb_exchange_token&client_id="+app_id+"&client_secret="+app_secret+"&fb_exchange_token="+token,
+			success : function(args) {
+				get_everlasting_id(args.access_token);
+			}
+		});
+	}
+
+	//영구토큰 가져오기 EX	(앱 아이디, 앱 시크릿번호, 앱 단기토큰 넣은다음에 get_everlasting_id 의 console.log 확인하면 영구토큰)
+	//get_longlived_token("386724858844782", "131168f9c9197ed26766afacbda545ba", "EAAFfuWXWVm4BAANHJfGNAuQpre8vt0ANOwlAzPDoyqi7wLzV6oY8ZAQZARzDZAgaDBGwyihy2SKFZCRAZC4lLxUkZAFwl6W2MCniB8wNsySKheWVyjZCeNri1H3qh4S5s7NZB9zXqSB1ZAocELn5rv3qYf4uDtBotpKT2Go3sukjinQcRVcM2yzQEuV8pEZBoPq8zpq1TrXgUp6QZDZD");
+	/* 영구토큰 가져오기 끝 */
+
+	get_contents_("", limit, "EAAFfuWXWVm4BADxjTrqAc4PG8ZBiZB5Cn1NUM5yfZBwXRsiYXAtuuxg2LaKnqVgjTrizZC45GXXLWsyhwsgfOSeLXHXAQqgHKSygP0Wa3b8ZC7My9UiWe8kqY5XDZCB3S5J1jv2eAutv5LmkYiwUXdPKSERpFZBmw9GWHIqaPPMGwZDZD");
+
+	$(function(){
+		$("[data-more-instagram]").click(function(){
+			if(next_page != undefined){
+				//alert(next_page);
+				get_contents_(next_page, limit, token); 
+			}
+
+		});
+	});
+</script>
+<!--
+	1. 관리자에 영구토큰 뽑는 메뉴 하나 만들고,
+	2. 사이트관리에 영구토큰 넣어놓고,
+	3. 그걸로 php
+	4. 타임라인으로....... count는 10으로 고정하고, 
+-->
+
+
+<!-- 목록9개노출 더보기 클릭시 추가노출 새로고침 없이 -->
+<div data-load-instagram>
+</div>
+<div class="btn_area">
+	<a href="javascript:void(0);" class="button lg" data-more-instagram><span>More</span></a>
+</div>
+
+
+<?
+	/*이것들 DB에 넣어둬야함*/
+	$client_id = "267011358228458";
+	$client_secret = "c9dbc8aa4aab11d8683140825e162482";
+	$code = "AQBQYY7pqg9qZ6aLyb-SV4UH2HQC1vMoDGBG62--vft8s27kykm3LGk7FUl2VCRldLNdNfNZpQB6toK5caYy0lXH_3e4CWq7TUvAXIFai5rbZghtm1z_sspLWJYkpWGH6x1yL4ZNC1jeDzqdwUkfl8gP16M8puymaF_xVkzMWD1gVhsCDfAnZr-Dxu-sv-Ku6PqwrpyIah0IEjkIsbRXRzm1Sv7JoOTwTMzp52LJLRUMtQ#_";
+	$user_id = "17841412509682425";
+	$long_token = "IGQVJXbnlMVTd1TGFGOXhhNTJfQWpQNU0zNDdjdlBqazZAmTUw5V2dyV0JfRkJ5dVNDbG02VDV4WlhQajVZAU2F0YXNvZAmhMSXFGVDRkdmM4S0hiSlpfaDFzQzk3THFwYnJRNV9aTzBR";
+	/*-------------------*/
+	
+	function getAuthcode_instagram($client_id){
+		alert("https://api.instagram.com/oauth/authorize?client_id=".$client_id."&redirect_uri=https://demomall.kohub.kr/&scope=user_profile,user_media&response_type=code");
+	}
+
+	//인증코드받기 최초1회 실행
+	getAuthcode_instagram($client_id);
+
+	//인증코드로 액세스 토큰 만들기 최초1회 실행
+	function getToken_instagram($client_id, $client_secret, $code){
+		$url = "https://api.instagram.com/oauth/access_token";
+		$post_array = array(
+			'client_id'=> $client_id,
+			'client_secret'=> $client_secret,
+			'grant_type'=>'authorization_code',
+			'redirect_uri'=>'https://demomall.kohub.kr/',
+			'code'=> $code
+		);
+		$curl = curl_init($url);
+		curl_setopt($curl, CURLOPT_POST,true);
+		curl_setopt($curl, CURLOPT_POSTFIELDS, $post_array);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);  
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+		$result = curl_exec($curl);
+		curl_close($curl);
+		$result = json_decode($result,true);
+		$long_token = longToken_instagram($client_secret, $result['access_token']);
+        $result[long_token] = $long_token;
+
+		//롱토큰 $result['long_token']
+		//유저아이디 $result['user_id']
+		//그냥토큰 $result['access_token']
+		return $result;
+	}
+
+
+	//액세스 토큰 만든것으로 롱토큰 만들기
+	function longToken_instagram($client_secret, $access_token){
+
+		$url = "https://graph.instagram.com/access_token?grant_type=ig_exchange_token&client_secret=$client_secret&access_token=$access_token";
+		$curl = curl_init($url);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);  
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+		$result = curl_exec($curl);
+		curl_close($curl);
+		$result = json_decode($result, true);
+		return $result['access_token'];
+	}
+
+
+
+	//https://graph.instagram.com/access_token?grant_type=ig_exchange_token&client_secret={instagram-app-secret}&access_token={access_token}
+
+	//$instagram_config = getToken_instagram($client_id, $client_secret, $code);
+
+	if(!$paging) $paging = 0;
+
+
+
+	function load_instagram2($user_id, $client_secret, $token, $limit, $paging){
+		if($limit != "all"){
+			$add_limit = "&limit=".$limit;
+		}
+
+		if(!$paging_url){
+			$url = "https://graph.instagram.com/".$user_id."/media?fields=id,media_type,media_url,permalink,thumbnail_url,username,caption&access_token=".$token.$add_limit;
+		} else {
+			$url = $paging_url;
+		}
+
+		$curl = curl_init($url);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);  
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+		$result = curl_exec($curl);
+		curl_close($curl);
+		$result = json_decode($result, true);
+
+		return $result;
+	}
+
+
+
+
+
+	function print_instagram_html($user_id, $client_secret, $token, $limit, $paging){
+		$instagram_data = load_instagram2($user_id, $client_secret, $long_token, "3", $paging);
+		return $instagram_data;
+	}
+
+	
+	$instagram_data = load_instagram2($user_id, $client_secret, $long_token, "all", $paging);
+
+	//그냥 막 뽑기 + 더보기 (더보기에 data-more-viewwww 에 한번에 나올 숫자 적어놓으면됨)
+
+	echo "<ul class=\"my_instagram\">";
+	foreach($instagram_data['data'] AS $idat){
+		echo "<li><a href=".$idat['permalink']." target=\"_blank\"><img src=".$idat['media_url']." style='width:50px; height:50px;'></a><p>".$idat['caption']."</p></li>";
+	}
+	echo "</ul>";
+	?>
+
+
+
+	<a href="javascript:void(0);" data-more-viewww="3">더보기</a>
+
+	<script type="text/javascript">
+	$(function(){
+		var default_ = $("[data-more-viewww]").data("more-viewww");
+		var limit_default = default_ - 1;
+		$(".my_instagram li:gt("+limit_default+")").hide();
+
+			$("[data-more-viewww]").click(function(){
+				var limit_config = $("[data-more-viewww]").data("more-viewww");
+				var limit = limit_config + default_;
+				if($(".my_instagram li").length+default_ > limit){
+					$("[data-more-viewww]").data("more-viewww", limit);
+					$(".my_instagram li:lt("+limit+")").show();
+					console.log(limit);
+				}
+			});
+	});
+	</script>
+
+	<?
+	
+	//페이징은 니들이해라...
+	echo "<ul class=\"my_instagram\">";
+	foreach($instagram_data['data'] AS $idat){
+		//echo "<li><a href=".$idat['permalink']." target=\"_blank\"><img src=".$idat['media_url']."></a><p>".$idat['caption']."</p></li>";
+	}
+	echo "</ul>";
+
+	if($instagram_data['paging']['next']){
+		$next_page = $paging + 1;
+		$prev_page = $paging - 1;
+		if($prev_page > 0){
+			echo "<a href='".$_SERVER['PHP_SELF']."?paging=".$prev_page."'>이전페이지</a>";
+		}
+		echo "<a href='".$_SERVER['PHP_SELF']."?paging=".$next_page."'>다음페이지</a>";
+		
+	}
+?>
+
+<? include("../../inc/footer.html") ?>

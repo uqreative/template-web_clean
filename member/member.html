@@ -1,0 +1,16 @@
+<? include  $_SERVER['DOCUMENT_ROOT'] . "/head.php"; ?>
+<? include  $_SERVER['DOCUMENT_ROOT'] . "/inc/top.html"; ?>
+<? include  $_SERVER['DOCUMENT_ROOT'] . "/inc/header.html"; ?>
+
+<!-- 작업 check :
+1. member관련 레이아웃구성하는 html페이지입니다.
+2. 레이어구성에서 필요한 부분있으면 마크업 추가해도됩니다. 
+3. 페이지 컨트롤 부분은 inc_control.html 파일에 선언해주세요. (일반컨텐츠동일)
+-->
+<!-- 본문 -->	
+	<? include_once  $_SERVER['DOCUMENT_ROOT'] . "/member/member.php"; ?>
+<!-- //본문 -->
+
+<? include("inc_control.html") ?>
+<? include  $_SERVER['DOCUMENT_ROOT'] . "/inc/footer.html"; ?>
+

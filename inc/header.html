@@ -1,0 +1,66 @@
+<header id="header">
+	<div class="inr">
+		<h1 class="logo">
+			<a href="/" class="link" aria-label="첫 화면으로 이동" title="첫 화면으로 이동">
+				<img src="/images/common/logo.svg" alt="<?=$site['og_site_name']?> 로고" width="115" height="42" class="img">
+				<span class="visually-hidden"><?=$site['og_site_name']?></span>
+			</a>
+		</h1>
+		<?
+			// data-visual-class 값이 서브 비주얼에 클래스로 추가됩니다.
+			// 게시판, 온라인, 프로그램은 루트 경로가 아닌 콘텐츠 경로에 맞춰주세요.
+		?>
+		<nav>
+			<ul class="gnb">
+				<li><a href="/contents/01_about/sub01.html" data-gnb="1" data-visual-class="about">회사소개</a>
+					<ul class="sub-menu">
+						<li><a href="/contents/01_about/sub01.html" data-gnb="2">인사말</a></li>
+						<li><a href="/contents/01_about/sub02.html" data-gnb="2">오시는 길</a></li>
+					</ul>
+				</li>
+				<li><a href="/contents/02_domestic/sub01.html" data-gnb="1" data-visual-class="domestic">국내 인허가</a></li>
+				<li><a href="/contents/03_us/sub01.html" data-gnb="1" data-visual-class="us">미국 인허가</a></li>
+				<li><a href="/contents/04_european/sub01.html" data-gnb="1" data-visual-class="european">유럽 인허가</a></li>
+				<li><a href="/contents/05_other/sub01.html" data-gnb="1" data-visual-class="other">기타 국가 인허가</a></li>
+				<li><a href="/contents/06_suitability/sub01.html" data-gnb="1" data-visual-class="suitability">사용적합성</a></li>
+				<li><a href="/contents/07_board/board.html?board_id=board_notice" data-gnb="1" data-visual-class="board">게시판</a>
+					<ul class="sub-menu">
+						<li><a href="/contents/07_board/board.html?board_id=board_notice" data-gnb="2">공지사항</a></li>
+						<li><a href="/contents/07_board/board.html?board_id=board_resource" data-gnb="2">자료실</a></li>
+					</ul>
+				</li>
+				<li><a href="/contents/08_contact/online.html?online_id=koweb_online_contact" data-gnb="1" data-visual-class="contact">문의하기</a></li>
+			</ul>
+		</nav>
+		<button type="button" id="drawer-toggle" class="drawer-toggle" aria-controls="drawer" aria-expanded="false" aria-label="전체 메뉴 열기/닫기" title="전체 메뉴 열기/닫기">
+			<span class="bar-group">
+				<span class="bar b1"></span>
+				<span class="bar b2"></span>
+				<span class="bar b3"></span>
+			</span>
+			전체메뉴
+		</button>
+	</div>
+	<div id="drawer-backdrop" class="drawer-backdrop"></div>
+	<aside id="drawer" class="drawer">
+		<div class="drawer-header">
+            <div>
+                <h1 class="logo">
+                    <a href="/" class="link" aria-label="첫 화면으로 이동" title="첫 화면으로 이동">
+                        <img src="/images/common/logo.svg" alt="<?=$site['og_site_name']?> 로고" width="115" height="42" class="img">
+                    </a>
+                </h1>
+            </div>
+			<button type="button" id="drawer-close" class="drawer-close" aria-controls="drawer" aria-label="메뉴 닫기" title="메뉴 닫기">
+				<span class="bar b1"></span>
+				<span class="bar b2"></span>
+				<span class="bar b3"></span>
+			</button>
+		</div>
+	</aside>
+</header>
+<? if(!($m_main_)){?> 
+	<? include $_SERVER['DOCUMENT_ROOT'] . "/inc/inc_visual_sub.html"; ?>
+	<div id="container">
+		<main id="content">
+<? } ?>

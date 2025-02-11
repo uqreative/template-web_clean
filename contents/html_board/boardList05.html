@@ -1,0 +1,169 @@
+<? include("../../inc/top.html") ?>
+
+
+<div class="wrap">
+        
+    <div class="bbsSearch" data-type="A">
+        <form action="" method="get">
+            <select name='cate'>
+                <option value="">전체</option>
+                <option value="제목">제목</option>
+                <option value="작성자">작성자</option>
+                <option value="내용">내용</option>
+            </select>
+            <div class="search_input">
+                <input type="text" id="keyword" name="keyword" value="" placeholder="검색어를 입력해주세요">
+                <input type="submit" class="button" value="검색">	
+            </div>
+        </form>						
+    </div>
+        
+    <p class="ko_board_count">총 <strong>135</strong>건</p>
+    <!-- 목록 --> 
+    <ul class="ko-basic-list">
+        <!-- 최대 10개 -->
+        <li>
+            <a href="">
+                <!-- 공지 -->
+                <em class="ko-basic-list__num notice">공지</em>
+                <!-- 새글일때 new -->
+                <div class="ko-basic-list__tit-wrap new">                    
+                    <span class="ko-basic-list__tit">케이오웹 기본 게시판 리스트 업데이트 되었습니다.</span>                            
+                </div>
+                <i class="ko-basic-list__date">2023.06.31</i>
+            </a>
+        </li>
+        <li class="ko-basic-list__item">
+            <a href="">
+                <em class="ko-basic-list__num notice">공지</em>
+                <div class="ko-basic-list__tit-wrap new">
+                    <span class="ko-basic-list__tit">드디어 반응형 게시판 리스트 제작 완료</span>
+                </div>
+                <i class="ko-basic-list__date">2023.06.31</i>
+            </a>
+        </li>
+        <li class="ko-basic-list__item">
+            <a href="">
+                <em class="ko-basic-list__num">8</em>
+                <div class="ko-basic-list__tit-wrap">
+                    <span class="ko-basic-list__tit">기본 게시판 리스트 업데이트 되었습니다.</span>
+                </div>
+                <i class="ko-basic-list__date">2023.06.31</i>
+            </a>
+        </li>
+        <li class="ko-basic-list__item">
+            <a href="">
+                <em class="ko-basic-list__num">7</em>
+                <div class="ko-basic-list__tit-wrap">
+                    <span class="ko-basic-list__tit">기본 리스트 반응형 업데이트 기본 리스트 반응형 업데이트 기본 리스트 반응형 업데이트 기본 리스트 반응형 업데이트 기본 리스트 반응형 업데이트</span>
+                </div>
+                <i class="ko-basic-list__date">2023.06.31</i>
+            </a>
+        </li>
+        <li class="ko-basic-list__item">
+            <a href="">
+                <em class="ko-basic-list__num">6</em>
+                <div class="ko-basic-list__tit-wrap">
+                    <span class="ko-basic-list__tit">케이오웹 기본 게시판 리스트 업데이트 되었습니다.</span>
+                </div>
+                <i class="ko-basic-list__date">2023.06.31</i>
+            </a>
+        </li><li class="ko-basic-list__item">
+            <a href="">
+                <em class="ko-basic-list__num">5</em>
+                <div class="ko-basic-list__tit-wrap">
+                    <!-- 답변 -->
+                    <span class="ko-basic-list__tit"><i class="reply">답변</i>케이오웹 기본 게시판 리스트 업데이트 되었습니다.</span>
+                    <!-- 댓글수 -->
+                    <i class="ko-basic-list__comment">[1]</i>
+                </div>
+                <i class="ko-basic-list__date">2023.06.31</i>
+            </a>
+        </li>
+        <li class="ko-basic-list__item">
+            <a href="">
+                <em class="ko-basic-list__num">4</em>
+                <div class="ko-basic-list__tit-wrap">
+                    <span class="ko-basic-list__tit">케이오웹 기본 게시판 리스트 업데이트 되었습니다.</span>
+                </div>
+                <i class="ko-basic-list__date">2023.06.31</i>
+            </a>
+        </li>
+        <li class="ko-basic-list__item">
+            <a href="">
+                <em class="ko-basic-list__num">3</em>
+                <div class="ko-basic-list__tit-wrap">
+                    <span class="ko-basic-list__tit">케이오웹 기본 게시판 리스트 업데이트 되었습니다.</span>
+                </div>
+                <i class="ko-basic-list__date">2023.06.31</i>
+            </a>
+        </li><li class="ko-basic-list__item">
+            <a href="">
+                <em class="ko-basic-list__num">2</em>
+                <div class="ko-basic-list__tit-wrap">
+                    <span class="ko-basic-list__tit">케이오웹 기본 게시판 리스트 업데이트 되었습니다.</span>
+                </div>
+                <i class="ko-basic-list__date">2023.06.31</i>
+            </a>
+        </li>
+        <li class="ko-basic-list__item">
+            <a href="">
+                <em class="ko-basic-list__num">1</em>
+                <div class="ko-basic-list__tit-wrap">
+                    <span class="ko-basic-list__tit">케이오웹 기본 게시판 리스트 업데이트 되었습니다.</span>
+                </div>
+                <i class="ko-basic-list__date">2023.06.31</i>
+            </a>
+        </li>
+    </ul>
+    <!-- //목록 -->
+
+        <!-- 데이터없을때 -->  
+    <div class="ko_board_noData">등록된 글이 없습니다.</div>
+    
+    <!-- 검색 및 버튼 -->
+    <div class="search_bbs">
+        <!-- 검색 -->
+        <!-- <div class="search">
+            <select name="searchType" id="searchType">
+                <option value="">전체</option>
+                <option value="subject"> 제목</option>
+                <option value="name">작성자</option>
+            </select>
+            <input type="text" id="searchTxt" name="searchTxt" value="">
+            <input type="submit" class="button" value="검색">
+        </div> -->
+        <!-- //검색 -->
+        
+        <!-- 버튼 -->
+        <div class="btn">
+            <a href="#" class="button">글쓰기</a>
+        </div>
+        <!-- //버튼 -->
+    </div>
+    <!-- 검색 및 버튼 -->
+        
+    <!-- page -->
+    <div class="pagination">
+        <div class="page_control_prev">
+            <a href="#" class="btn_end first">맨처음</a>
+            <a href="#" class="btn_pager prev">이전</a>
+        </div>		
+        <ol>
+            <li class="ko-basic-list__item"><a href="">1</a></li>
+            <!-- 현재페이지일때 on -->
+            <li class="on"><a href="">2</a></li>
+            <li class="ko-basic-list__item"><a href="">3</a></li>
+            <li class="ko-basic-list__item"><a href="">4</a></li>
+            <li class="ko-basic-list__item"><a href="">5</a></li>
+        </ol>
+        <div class="page_control_next">
+            <a href="#" class="btn_pager next">다음</a>
+            <a href="#" class="btn_end last">맨마지막</a>			
+        </div>			
+    </div>
+    <!-- //page -->
+
+</div>
+
+<? include("../../inc/footer.html") ?>

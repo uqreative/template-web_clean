@@ -1,0 +1,163 @@
+<?
+$date = empty($_GET['date']) ? date('Y-m-d') : $_GET['date'];
+$firstDate = date('Y-m-01',strtotime($date));
+$firstDateWcode = date('w',strtotime($firstDate));
+$lastDateDay = date('t', strtotime($date));
+$lastDateWcode = date('w',strtotime( date('Y-m-'.$lastDateDay,strtotime($date)) ));
+
+$prevDate = date('Y-m-d',strtotime("-1 month",strtotime($firstDate)));
+$nextDate = date('Y-m-d',strtotime("+1 month",strtotime($firstDate)));
+$prevLastDateDay = date('t', strtotime($prevDate));
+
+$week = array();
+$day = 1;
+
+while(1) {
+	$subWeek = array();
+	for($i=0;$i<7;$i++){
+		if( $day > $lastDateDay){ 
+
+			// 마지막 날의 날짜코드가 6이 아니라면, 다음달을 미리 넣어준다.
+			if( $lastDateWcode != 6){
+				for($si=0;$si < 6-$lastDateWcode; $si++){
+					$thisDate = date('Y-m-'.($si+1),strtotime("+1 month",strtotime($firstDate)));
+					$subWeek[] = array('type'=>'next', 'day'=>$si+1,'date'=>$thisDate,'wcode'=>date('w',strtotime($thisDate)));		
+				}				
+			}
+			break; 
+		}
+		if( $day == 1 && $firstDateWcode != 0){
+			for($si=($prevLastDateDay-$firstDateWcode);$si < $prevLastDateDay; $si++){
+				$thisDate = date('Y-m-'.($si+1),strtotime("-1 month",strtotime($firstDate)));
+				$subWeek[] = array('type'=>'prev', 'day'=>$si+1,'date'=>$thisDate,'wcode'=>date('w',strtotime($thisDate)));
+			}
+			$i += $firstDateWcode;
+		}
+
+		$thisDate = date('Y-m-'.$day,strtotime($firstDate));
+		$subWeek[] = array('type'=>'now', 'day'=>$day,'date'=>$thisDate,'wcode'=>date('w',strtotime($thisDate)));		
+		$day++;
+	}
+	$week[] = $subWeek;
+	if( $day > $lastDateDay){ break; }
+}
+
+$this_y = date("Y-m", strtotime($date));
+
+?>
+<!-- 로딩 -->
+<div id="div_ajax_load_image" class="area_loding" style="display:none">
+	<img src="/images/content/loading.gif" class="img" alt="loading">
+</div>
+<!-- //로딩 -->
+<div class="area_calendar type02">
+	<!-- 이전달/다음달 -->
+	<div class="control">
+		<div>
+			<a href="<?=$PHP_SELF?>?board_id=<?=$board_id?>&amp;date=<?=$prevDate?>" class="btn_prev">이전달</a>
+			<p><?=$this_y?></p>
+			<a href="<?=$PHP_SELF?>?board_id=<?=$board_id?>&amp;date=<?=$nextDate?>" class="btn_next">다음달</a>
+		</div>
+		<a href="<?=$PHP_SELF?>?board_id=<?=$board_id?>" class="btn_today">Today</a>
+	</div>
+	<div class="calendar">
+	<!-- today표시 td class="today" 선택시 class="on" -->
+	<table>
+		<caption>일,월,화,수,목,금,토 요일별 정보를 제공하는 표</caption>
+		<thead>
+			<tr>
+				<th scope="col" data-calendar="sun">일</th>
+				<th scope="col" data-calendar="mon">월</th>
+				<th scope="col" data-calendar="tue">화</th>
+				<th scope="col" data-calendar="web">수</th>
+				<th scope="col" data-calendar="thu">목</th>
+				<th scope="col" data-calendar="fri">금</th>
+				<th scope="col" data-calendar="sat">토</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+<?
+	foreach($week as $k=>$v){
+	echo '<tr>';
+	foreach($v as $sk=>$sv){
+		echo '<td class="wcode_'.$sv['wcode'].''.($sv['type'] != 'now' ? ' prevnext':'').'" title="'.$sv['date'].'">'.$sv['day'].'</td>';
+	}
+	echo '</tr>';
+}
+?>
+
+
+
+
+		</tbody>
+	</table>
+</div>
+
+<div class="btn_area">
+	<? if ($auth_write) { ?>
+		<a href="<?=$PHP_SELF?>?board_id=<?=$board_id?>&amp;select_date=<?=$select_date?>&amp;year=<?=$year?>&amp;month=<?=$month?>&mode=write" class="button">등록</a>
+	<? } ?>
+</div>
+
+
+<!-- 목록 -->
+<div class="list">
+	<!-- 기본 날짜는 today 선택시 해당날짜 표시 -->
+	<p data-date-area="list"><?=$select_date?></p>
+	<? if ($auth_write) { ?>
+		<a href="<?=$PHP_SELF?>?board_id=<?=$board_id?>&amp;select_date=<?=$select_date?>&amp;year=<?=$year?>&amp;month=<?=$month?>&mode=write" class="button white" style="position:absolute; bottom:0px; right:103px; width:80px; height:43px; min-width:inherit; line-height:42px; margin:0px;">등록</a>
+	<? } ?>
+	<div class="slide" data-list-area>
+		<ul>
+		<?
+			$list_query = "SELECT * FROM $board_id WHERE 1=1 AND select_date = '$select_date' ORDER BY no DESC";
+			$list_result = mysqli_query($dbp, $list_query);
+			$count_list = 1;
+			while($list_ = mysqli_fetch_array($list_result)){
+				if($count_list % 6 == 0 && $count_list != 1){
+					echo "</ul><ul>";
+				}
+				echo "<li><a href=\"$PHP_SELF?board_id=$board_id&amp;select_date=$select_date&no=$list_[no]\">$list_[title]</a></li>";
+			}
+		?>
+		</ul>
+	</div>
+
+</div>
+<!-- //목록 -->
+
+<?
+	if($_GET[no]){
+		include "view.html";
+	}
+?>
+
+</div>
+<!--
+<script type="text/javascript">
+$(function(){
+	$("[data-load-list]").click(function(){
+		var ndate = $(this).data("load-list");
+		$.ajax({
+			type : "POST",
+			url : "/ko_admin/board/skin/calendar_A/calendar_ajax.php",
+			data : {
+				board_id : "<?=$board_id?>",
+				date : ndate
+			},
+			success : function(args) {
+				$("[data-list-area]").html(args);
+				$("[data-date-area=list]").html(ndate);
+			},
+			beforeSend: function () {
+				$("#div_ajax_load_image").show();
+			},
+			complete: function () {
+				$("#div_ajax_load_image").hide();
+			}
+		});
+	});
+});
+</script>
+-->

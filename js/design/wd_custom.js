@@ -18,53 +18,53 @@ window.addEventListener('scroll', ()=>{
 });
 
 /**
- * ìŠ¤í¬ë¡¤ ì´ë²¤íŠ¸ì— ë”°ë¼ `body` ìš”ì†Œì— ìŠ¤í¬ë¡¤ ìƒíƒœë¥¼ ë‚˜íƒ€ë‚´ëŠ” í´ëž˜ìŠ¤ë¥¼ ì¶”ê°€í•˜ê±°ë‚˜ ì œê±°í•©ë‹ˆë‹¤.
+ * 스크롤 이벤트에 따라 `body` 요소에 스크롤 상태를 나타내는 클래스를 추가하거나 제거합니다.
  * 
- * - ì‚¬ìš©ìžê°€ ìŠ¤í¬ë¡¤ì„ ì¼ì • ê¸°ì¤€(OFFSET) ì´ìƒ ë‚´ë¦¬ë©´ `body`ì— `isScrolled` í´ëž˜ìŠ¤ë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
- * - ìŠ¤í¬ë¡¤ ìœ„ì¹˜ê°€ ê¸°ì¤€ê°’ ì´í•˜ë¡œ ë‚´ë ¤ê°€ë©´ í•´ë‹¹ í´ëž˜ìŠ¤ë¥¼ ì œê±°í•©ë‹ˆë‹¤.
- * - ë¸Œë¼ìš°ì €ì˜ ì„±ëŠ¥ì„ ê³ ë ¤í•˜ì—¬ `requestAnimationFrame`ì„ ì‚¬ìš©í•´ ìµœì í™”ëœ ë°©ì‹ìœ¼ë¡œ í´ëž˜ìŠ¤ ë³€ê²½ì„ ì²˜ë¦¬í•©ë‹ˆë‹¤.
+ * - 사용자가 스크롤을 일정 기준(OFFSET) 이상 내리면 `body`에 `isScrolled` 클래스를 추가합니다.
+ * - 스크롤 위치가 기준값 이하로 내려가면 해당 클래스를 제거합니다.
+ * - 브라우저의 성능을 고려하여 `requestAnimationFrame`을 사용해 최적화된 방식으로 클래스 변경을 처리합니다.
  */
 function checkIfScrolled() {
     /**
      * @constant {number} OFFSET
-     * ê¸°ì¤€ ìŠ¤í¬ë¡¤ ìœ„ì¹˜ìž…ë‹ˆë‹¤. 
-     * - ìŠ¤í¬ë¡¤ ê°’ì´ ì´ ê°’ì„ ì´ˆê³¼í•˜ë©´ í´ëž˜ìŠ¤ë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
-     * - í˜„ìž¬ëŠ” 0ìœ¼ë¡œ ì„¤ì •ë˜ì–´ ìžˆì§€ë§Œ, í•„ìš” ì‹œ `window.innerHeight / 2` ë“±ìœ¼ë¡œ ë³€ê²½í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.
+     * 기준 스크롤 위치입니다. 
+     * - 스크롤 값이 이 값을 초과하면 클래스를 추가합니다.
+     * - 현재는 0으로 설정되어 있지만, 필요 시 `window.innerHeight / 2` 등으로 변경할 수 있습니다.
      */
     const OFFSET = 0;
 
     /**
      * @constant {string} ISSCROLLED
-     * ìŠ¤í¬ë¡¤ ìƒíƒœë¥¼ ë‚˜íƒ€ë‚´ê¸° ìœ„í•´ `body` ìš”ì†Œì— ì¶”ê°€ë˜ëŠ” í´ëž˜ìŠ¤ ì´ë¦„ìž…ë‹ˆë‹¤.
+     * 스크롤 상태를 나타내기 위해 `body` 요소에 추가되는 클래스 이름입니다.
      */
     const ISSCROLLED = 'isScrolled';
 
-    // ìŠ¤í¬ë¡¤ ì´ë²¤íŠ¸ ë“±ë¡
+    // 스크롤 이벤트 등록
     window.addEventListener('scroll', () => {
-        // ìŠ¤í¬ë¡¤ ì²˜ë¦¬ ìµœì í™”ë¥¼ ìœ„í•´ requestAnimationFrame ì‚¬ìš©
+        // 스크롤 처리 최적화를 위해 requestAnimationFrame 사용
         requestAnimationFrame(() => {
-            // í˜„ìž¬ ìŠ¤í¬ë¡¤ ìœ„ì¹˜ê°€ OFFSETì„ ì´ˆê³¼í•˜ë©´ í´ëž˜ìŠ¤ë¥¼ ì¶”ê°€, ì•„ë‹ˆë©´ ì œê±°
+            // 현재 스크롤 위치가 OFFSET을 초과하면 클래스를 추가, 아니면 제거
             document.body.classList.toggle(ISSCROLLED, window.scrollY > OFFSET);
         });
     });
 }
 
 /**
- * Drawer ë©”ë‰´ë¥¼ ì´ˆê¸°í™”í•©ë‹ˆë‹¤.
+ * Drawer 메뉴를 초기화합니다.
  *
- * ì£¼ìš” ê¸°ëŠ¥:
- * - Headerì˜ GNB(nav)ë¥¼ ë³µì‚¬í•˜ì—¬ Drawer ë©”ë‰´ ìƒì„±
- * - Drawer í† ê¸€ ë²„íŠ¼ìœ¼ë¡œ Drawer ì—´ê¸°/ë‹«ê¸°
- * - ESC í‚¤ ìž…ë ¥ ë° ë°±ë“œë¡­ í´ë¦­ ì‹œ Drawer ë‹«ê¸°
- * - Drawer ë‚´ GNBì—ì„œ ì„œë¸Œ ë©”ë‰´ í† ê¸€ ë²„íŠ¼ ìƒì„± ë° ë™ìž‘ ì²˜ë¦¬
+ * 주요 기능:
+ * - Header의 GNB(nav)를 복사하여 Drawer 메뉴 생성
+ * - Drawer 토글 버튼으로 Drawer 열기/닫기
+ * - ESC 키 입력 및 백드롭 클릭 시 Drawer 닫기
+ * - Drawer 내 GNB에서 서브 메뉴 토글 버튼 생성 및 동작 처리
  *
- * @throws {Error} header ë‚´ `nav` ìš”ì†Œê°€ ì—†ì„ ê²½ìš°
- * @throws {Error} `#drawer` ìš”ì†Œê°€ ì—†ì„ ê²½ìš°
- * @throws {Error} `#drawer-toggle` ìš”ì†Œê°€ ì—†ì„ ê²½ìš°
- * @throws {Error} Drawer ë‚´ `.gnb` ìš”ì†Œê°€ ì—†ì„ ê²½ìš°
+ * @throws {Error} header 내 `nav` 요소가 없을 경우
+ * @throws {Error} `#drawer` 요소가 없을 경우
+ * @throws {Error} `#drawer-toggle` 요소가 없을 경우
+ * @throws {Error} Drawer 내 `.gnb` 요소가 없을 경우
  */
 function initializeDrawerMenu() {
-    // ìƒìˆ˜ ì •ì˜: DOM ìš”ì†Œ ID ë° í´ëž˜ìŠ¤ ì´ë¦„
+    // 상수 정의: DOM 요소 ID 및 클래스 이름
     const DRAWER = 'drawer';
     const DRAWER_TOGGLE = 'drawer-toggle';
     const DRAWER_BACKDROP = 'drawer-backdrop';
@@ -74,46 +74,46 @@ function initializeDrawerMenu() {
     const IS_EXPANDED = 'isExpanded';
 
     try {
-        // ì£¼ìš” DOM ìš”ì†Œ ì´ˆê¸°í™”
+        // 주요 DOM 요소 초기화
         const navEl = document.querySelector('header nav');
-        if (!navEl) throw new Error('header ë‚´ nav ìš”ì†Œë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.');
+        if (!navEl) throw new Error('header 내 nav 요소를 찾을 수 없습니다.');
 
         const drawerEl = document.getElementById(DRAWER);
-        if (!drawerEl) throw new Error(`#${DRAWER} ìš”ì†Œë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.`);
+        if (!drawerEl) throw new Error(`#${DRAWER} 요소를 찾을 수 없습니다.`);
 
         const drawerToggleEl = document.getElementById(DRAWER_TOGGLE);
-        if (!drawerToggleEl) throw new Error(`#${DRAWER_TOGGLE} ìš”ì†Œë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.`);
+        if (!drawerToggleEl) throw new Error(`#${DRAWER_TOGGLE} 요소를 찾을 수 없습니다.`);
 
         const drawerCloseEl = document.getElementById(DRAWER_CLOSE);
         const drawerBackdropEl = document.getElementById(DRAWER_BACKDROP);
 
         /**
-         * Headerì˜ nav ìš”ì†Œë¥¼ ë³µì‚¬í•˜ì—¬ Drawerì— ì¶”ê°€
+         * Header의 nav 요소를 복사하여 Drawer에 추가
          */
         function cloneNavToDrawer() {
-            const navClone = navEl.cloneNode(true); // nav ìš”ì†Œ ê¹Šì€ ë³µì‚¬
-            drawerEl.appendChild(navClone); // Drawerì— ì¶”ê°€
+            const navClone = navEl.cloneNode(true); // nav 요소 깊은 복사
+            drawerEl.appendChild(navClone); // Drawer에 추가
 
-            // ë³µì‚¬ëœ navì˜ gnb í´ëž˜ìŠ¤ ë³€ê²½
+            // 복사된 nav의 gnb 클래스 변경
             const gnbEl = drawerEl.querySelector('.gnb');
-            if (!gnbEl) throw new Error("Drawer ë‚´ gnb ìš”ì†Œë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
+            if (!gnbEl) throw new Error("Drawer 내 gnb 요소를 찾을 수 없습니다.");
             gnbEl.classList.replace('gnb', DRAWER_GNB);
         }
 
         /**
-         * Drawer ë‚´ GNB í•­ëª©ì— ì„œë¸Œ ë©”ë‰´ í† ê¸€ ë²„íŠ¼ ì¶”ê°€
+         * Drawer 내 GNB 항목에 서브 메뉴 토글 버튼 추가
          */
         function setupMenuButtons() {
             const drawerGnbItems = drawerEl.querySelectorAll(`.${DRAWER_GNB} > li`);
 
             drawerGnbItems.forEach(item => {
                 const subMenuEl = item.querySelector('.sub-menu');
-                if (!subMenuEl) return; // ì„œë¸Œ ë©”ë‰´ê°€ ì—†ìœ¼ë©´ ìŠ¤í‚µ
+                if (!subMenuEl) return; // 서브 메뉴가 없으면 스킵
 
                 const gnbLink = item.querySelector('a');
                 const visualClass = gnbLink.dataset.visualClass;
 
-                // ì„œë¸Œ ë©”ë‰´ í† ê¸€ ë²„íŠ¼ ìƒì„±
+                // 서브 메뉴 토글 버튼 생성
                 const toggleButton = document.createElement('button');
                 toggleButton.type = 'button';
                 toggleButton.id = `${visualClass}-button`;
@@ -122,18 +122,18 @@ function initializeDrawerMenu() {
                 toggleButton.setAttribute('aria-controls', `${visualClass}-menu`);
                 toggleButton.setAttribute('aria-expanded', 'false');
 
-                // ë§í¬ ë’¤ì— ë²„íŠ¼ ì¶”ê°€
+                // 링크 뒤에 버튼 추가
                 gnbLink.insertAdjacentElement('afterend', toggleButton);
 
-                // ì„œë¸Œ ë©”ë‰´ ì ‘ê·¼ì„± ì„¤ì •
+                // 서브 메뉴 접근성 설정
                 subMenuEl.id = `${visualClass}-menu`;
                 subMenuEl.setAttribute('aria-labelledby', toggleButton.id);
             });
         }
 
         /**
-         * Drawer ì„œë¸Œ ë©”ë‰´ ì—´ê¸°/ë‹«ê¸°
-         * @param {MouseEvent} event - í´ë¦­ ì´ë²¤íŠ¸ ê°ì²´
+         * Drawer 서브 메뉴 열기/닫기
+         * @param {MouseEvent} event - 클릭 이벤트 객체
          */
         function toggleSubmenu(event) {
             const button = event.target;
@@ -143,12 +143,12 @@ function initializeDrawerMenu() {
             const submenuId = button.getAttribute('aria-controls');
             const submenuEl = document.getElementById(submenuId);
 
-            // ëª¨ë“  ë²„íŠ¼ ë‹«ê¸°
+            // 모든 버튼 닫기
             document.querySelectorAll(`.${DRAWER_GNB} button`).forEach(btn => {
                 btn.setAttribute('aria-expanded', 'false');
             });
 
-            // í˜„ìž¬ ë²„íŠ¼ ë° ì„œë¸Œ ë©”ë‰´ ìƒíƒœ í† ê¸€
+            // 현재 버튼 및 서브 메뉴 상태 토글
             if (!isExpanded) {
                 button.setAttribute('aria-expanded', 'true');
                 submenuEl?.classList.add(IS_EXPANDED);
@@ -158,8 +158,8 @@ function initializeDrawerMenu() {
         }
 
         /**
-         * Drawer ì—´ê¸°/ë‹«ê¸° í† ê¸€
-         * @param {boolean|null} open - ì—´ê¸°(true), ë‹«ê¸°(false), í† ê¸€(null)
+         * Drawer 열기/닫기 토글
+         * @param {boolean|null} open - 열기(true), 닫기(false), 토글(null)
          */
         function toggleDrawer(open = null) {
             const isCurrentlyExpanded = drawerToggleEl.getAttribute('aria-expanded') === 'true';
@@ -171,18 +171,18 @@ function initializeDrawerMenu() {
         }
 
         /**
-         * ESC í‚¤ ìž…ë ¥ìœ¼ë¡œ Drawer ë‹«ê¸°
-         * @param {KeyboardEvent} event - í‚¤ë³´ë“œ ì´ë²¤íŠ¸ ê°ì²´
+         * ESC 키 입력으로 Drawer 닫기
+         * @param {KeyboardEvent} event - 키보드 이벤트 객체
          */
         function closeDrawerOnEscape(event) {
             if (event.key === 'Escape') toggleDrawer(false);
         }
 
-        // ì´ˆê¸°í™” ìž‘ì—… ì‹¤í–‰
+        // 초기화 작업 실행
         cloneNavToDrawer();
         setupMenuButtons();
 
-        // ì´ë²¤íŠ¸ ë¦¬ìŠ¤ë„ˆ ë“±ë¡
+        // 이벤트 리스너 등록
 		drawerEl.addEventListener('click', toggleSubmenu);
 		drawerToggleEl.addEventListener('click', toggleDrawer);
 		drawerCloseEl?.addEventListener('click', () => toggleDrawer(false));
@@ -190,14 +190,14 @@ function initializeDrawerMenu() {
 		document.addEventListener('keydown', closeDrawerOnEscape);
 
     } catch (error) {
-        console.error('initializeDrawerMenu ì´ˆê¸°í™” ì¤‘ ì˜¤ë¥˜:', error);
+        console.error('initializeDrawerMenu 초기화 중 오류:', error);
     }
 }
 
 
 /**
- * ë°©ë¬¸í•œ íŽ˜ì´ì§€ì˜ urlê³¼ `[data-gnb]`ì˜ herfë¥¼ ë¹„êµí•˜ì—¬ í˜„ìž¬ ë°©ë¬¸ ì¤‘ì¸ ì•µì»¤ì— `ISVISITING` í´ëž˜ìŠ¤ë¥¼ ì¶”ê°€í•˜ê³ ,
- * gnb 1, 2ì°¨ ë©”ë‰´ëª…ì„ `[data-menu-snb]`ì— ì¶œë ¥í•©ë‹ˆë‹¤.
+ * 방문한 페이지의 url과 `[data-gnb]`의 herf를 비교하여 현재 방문 중인 앵커에 `ISVISITING` 클래스를 추가하고,
+ * gnb 1, 2차 메뉴명을 `[data-menu-snb]`에 출력합니다.
  */
 function initializeSnbMenu(){
 	const ISVISITING = 'isVisiting';
@@ -214,11 +214,11 @@ function initializeSnbMenu(){
 	});
 	const programHref = `${urlPath}?${parameters.item}=${parameters.value}`;
 	
-	// url ë¹„êµí•´ì„œ ë°©ë¬¸ ì¤‘ì¸ ì•µì»¤ì— isVIsiting í´ëž˜ìŠ¤ ì¶”ê°€, í‘¸í„° ë©”ë‰´ ë” ë¶ˆëŸ¬ì˜¨ ë’¤ì—
+	// url 비교해서 방문 중인 앵커에 isVIsiting 클래스 추가, 푸터 메뉴 돔 불러온 뒤에
 	document.querySelectorAll('[data-gnb]').forEach(function(element) {
-		if(element.getAttribute('href') === undefined) return; // ëª¨ë°”ì¼ í† ê¸€ ë²„íŠ¼ ê±´ë„ˆë›°ê¸°
+		if(element.getAttribute('href') === undefined) return; // 모바일 토글 버튼 건너뛰기
 		if(element.getAttribute('href') === urlPath || element.getAttribute('href') === programHref || (urlPath+urlSearch).includes(element.getAttribute('href')) ){
-			// ì¹´í…Œê³ ë¦¬ë³„ ë©”ë‰´ê°€ ìžˆì„ ê²½ìš° êµ¬ë¶„í•´ì„œ í´ëž˜ìŠ¤ ì¶”ê°€, ë¯¸ì™„ì„± ì½”ë“œ ìˆ˜ì • í•„ìš”
+			// 카테고리별 메뉴가 있을 경우 구분해서 클래스 추가, 미완성 코드 수정 필요
 			// if( category == null ){
 			// 	element.classList.add(ISVISITING);
 			// }else if( element.getAttribute('href') === `${programHref}&cate=${category}` ){
@@ -226,25 +226,25 @@ function initializeSnbMenu(){
 			// }
 			element.classList.add(ISVISITING);
 
-			// í™œì„±í™”ëœ 1ì°¨, 2ì°¨ ë©”ë‰´ê°€ ë‹¤ë¥¼ ê²½ìš° 1ì°¨ ë©”ë‰´ì— ë°©ë¬¸ ì¶”ê°€
+			// 활성화된 1차, 2차 메뉴가 다를 경우 1차 메뉴에 방문 추가
 			const gnbLevel = element.getAttribute('data-gnb');
 			if( gnbLevel != '1' ){
 				element.closest('.sub-menu').previousElementSibling.classList.add(ISVISITING);
 				// element.closest('.dropdown-menu').previousElementSibling.classList.add(ISVISITING);
 			}
 
-			// ì„œë¸Œ ë¹„ì£¼ì–¼ í´ëž˜ìŠ¤ ì¶”ê°€
+			// 서브 비주얼 클래스 추가
 			const visualEl = document.querySelector('.area-subVisual');
 			const visualClass = document.querySelector(`.${ISVISITING}[data-gnb="1"]`)?.getAttribute('data-visual-class');
 			if( visualClass != undefined ){
 				visualEl?.classList.add(visualClass);
 			}else{
-				visualEl?.classList.add('common'); // íšŒì› ë©”ë‰´ ë‹¤ë¥´ê²Œ ì„¤ì •í•˜ë ¤ë©´ member
+				visualEl?.classList.add('common'); // 회원 메뉴 다르게 설정하려면 member
 			}
 		}
 	});
 
-	// 1, 2ì°¨ íƒ€ì´í‹€ ì„ ì–¸
+	// 1, 2차 타이틀 선언
 	const gnbMenu1Visiting = document.querySelector(`.gnb .${ISVISITING}[data-gnb="1"], footer .${ISVISITING}[data-gnb="1"]`);
 	const gnbMenu2Visiting = document.querySelector(`.gnb .${ISVISITING}[data-gnb="2"]`);
 	const snbMenu1 = document.querySelectorAll('[data-menu-snb="1"]');
@@ -252,24 +252,24 @@ function initializeSnbMenu(){
 	let gnbTitle1 = gnbMenu1Visiting?.textContent;
 	let gnbTitle2 = gnbMenu2Visiting?.textContent;
 
-	// 1, 2ì°¨ íƒ€ì´í‹€ ì‚½ìž…
-	if( gnbTitle1 == undefined ){ // ë©¤ë²„ì²˜ëŸ¼ gnbì— ì—†ëŠ” íŽ˜ì´ì§€, modeì— ë”°ë¼ì„œ êµ¬ë¶„
+	// 1, 2차 타이틀 삽입
+	if( gnbTitle1 == undefined ){ // 멤버처럼 gnb에 없는 페이지, mode에 따라서 구분
 		switch (mode) {
-			case "agree" : gnbTitle1 = 'íšŒì›ê°€ìž…'; break;
-			case "join" : gnbTitle1 = 'íšŒì›ê°€ìž…'; break;
-			case "join_proc" : gnbTitle1 = 'íšŒì›ê°€ìž…'; break;
-			case "login" : gnbTitle1 = 'ë¡œê·¸ì¸'; break;
-			case "login_proc" : gnbTitle1 = 'ë¡œê·¸ì¸'; break;
-			case "naver" : gnbTitle1 = 'ë¡œê·¸ì¸'; break;
-			case "kakao" : gnbTitle1 = 'ë¡œê·¸ì¸'; break;
-			case "logout" : gnbTitle1 = 'ë¡œê·¸ì•„ì›ƒ'; break;
-			case "modify" : gnbTitle1 = 'íšŒì›ì •ë³´'; break;
-			case "modify_proc" : gnbTitle1 = 'íšŒì›ì •ë³´'; break;
-			case "secession" : gnbTitle1 = 'íšŒì›ì •ë³´'; break;
-			case "check" : gnbTitle1 = 'íšŒì›ì •ë³´'; break;
-			case "find_id" : gnbTitle1 = 'ì•„ì´ë”” ì°¾ê¸°'; break;
-			case "find_pw" : gnbTitle1 = 'ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°'; break;
-			case "find_proc" : gnbTitle1 = 'ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°'; break;
+			case "agree" : gnbTitle1 = '회원가입'; break;
+			case "join" : gnbTitle1 = '회원가입'; break;
+			case "join_proc" : gnbTitle1 = '회원가입'; break;
+			case "login" : gnbTitle1 = '로그인'; break;
+			case "login_proc" : gnbTitle1 = '로그인'; break;
+			case "naver" : gnbTitle1 = '로그인'; break;
+			case "kakao" : gnbTitle1 = '로그인'; break;
+			case "logout" : gnbTitle1 = '로그아웃'; break;
+			case "modify" : gnbTitle1 = '회원정보'; break;
+			case "modify_proc" : gnbTitle1 = '회원정보'; break;
+			case "secession" : gnbTitle1 = '회원정보'; break;
+			case "check" : gnbTitle1 = '회원정보'; break;
+			case "find_id" : gnbTitle1 = '아이디 찾기'; break;
+			case "find_pw" : gnbTitle1 = '비밀번호 찾기'; break;
+			case "find_proc" : gnbTitle1 = '비밀번호 찾기'; break;
 			default: const memberTitle = document.querySelector(".join_area h2")?.innerText; gnbTitle1 = memberTitle; break;
 		}
 	}
@@ -283,7 +283,7 @@ function initializeSnbMenu(){
 			element.textContent = gnbTitle2;
 		} else {
 			element.textContent = gnbTitle1;
-			element.classList.add(ISFALLBACK); // 2ì°¨ ë©”ë‰´ê°€ ì—†ëŠ” íŽ˜ì´ì§€ì—ì„œ ì œëª©ì„ ìˆ¨ê²¨ì•¼í•  ë•Œ í™œìš©
+			element.classList.add(ISFALLBACK); // 2차 메뉴가 없는 페이지에서 제목을 숨겨야할 때 활용
 		}
 	});
 
@@ -298,7 +298,7 @@ function initializeSnbMenu(){
 	// lnb dropdown
 	// gnbMenu1Visiting.next('ul').clone().appendTo('.lnb__gnb.gnb2');
 	
-	// 1, 2ì°¨ ë©”ë‰´ê°€ ëª¨ë‘ í•„ìš”í•œ ê²½ìš°, ìœ„ ìŠ¤í¬ë¦½íŠ¸ ì£¼ì„ ì²˜ë¦¬, appendTo ê²½ë¡œë¥¼ ë°”ê¿”ì„œ ì‚¬ìš©
+	// 1, 2차 메뉴가 모두 필요한 경우, 위 스크립트 주석 처리, appendTo 경로를 바꿔서 사용
 	// const level1 = $('.lnbDepth1 nav');
 	// const level2 = $('.lnbDepth2 nav');
 	// $('.gnb').clone().appendTo(level1).find('.sub_menu').remove();
@@ -312,7 +312,7 @@ function initializeSnbMenu(){
 		}
 	});
 
-	// sub nav í™œì„±í™”ëœ ë§Œí¼ ìŠ¤í¬ë¡¤, ê¸°ë³¸ snb ë°©ì‹ì´ ì•„ë‹ ê²½ìš° ë¶ˆí•„ìš”í•˜ë¯€ë¡œ ì‚­ì œ
+	// sub nav 활성화된 만큼 스크롤, 기본 snb 방식이 아닐 경우 불필요하므로 삭제
 	$(window).on('load', function(){
 		if($("#header .gnb").is(":hidden")){
 			if($('.lnb li').length > 0){
@@ -324,56 +324,56 @@ function initializeSnbMenu(){
 }
 
 /**
- * ì ‘ê·¼ì„± ìžˆëŠ” í† ê¸€ ë²„íŠ¼ì„ ì´ˆê¸°í™”í•©ë‹ˆë‹¤.
+ * 접근성 있는 토글 버튼을 초기화합니다.
  * 
- * - ë²„íŠ¼ í´ë¦­ ì‹œ `aria-expanded` ì†ì„±ì„ ì „í™˜í•˜ì—¬ ëŒ€ìƒ ìš”ì†Œì˜ í‘œì‹œ ìƒíƒœë¥¼ ë‚˜íƒ€ëƒ…ë‹ˆë‹¤.
- * - ëŒ€ìƒ ìš”ì†Œì˜ í´ëž˜ìŠ¤(`isExpanded`)ë¥¼ ì¶”ê°€í•˜ê±°ë‚˜ ì œê±°í•˜ì—¬ ì‹œê°ì  ìƒíƒœë¥¼ ì œì–´í•©ë‹ˆë‹¤.
+ * - 버튼 클릭 시 `aria-expanded` 속성을 전환하여 대상 요소의 표시 상태를 나타냅니다.
+ * - 대상 요소의 클래스(`isExpanded`)를 추가하거나 제거하여 시각적 상태를 제어합니다.
  * 
- * @param {string} buttonSelector - í† ê¸€ ë²„íŠ¼ì„ ì„ íƒí•˜ê¸° ìœ„í•œ CSS ì„ íƒìž.
+ * @param {string} buttonSelector - 토글 버튼을 선택하기 위한 CSS 선택자.
  * 
  * @example
- * // HTML ì˜ˆì œ:
+ * // HTML 예제:
  * // <button id="toggleBtn" aria-controls="content" aria-expanded="false">Toggle</button>
- * // <div id="content" class="hidden">ë‚´ìš©</div>
+ * // <div id="content" class="hidden">내용</div>
  * 
- * // JavaScript í˜¸ì¶œ:
+ * // JavaScript 호출:
  * initAccessibleToggle('#toggleBtn');
  * 
- * // ìž‘ë™ ì„¤ëª…:
- * // ë²„íŠ¼ì„ í´ë¦­í•˜ë©´:
- * // 1. ë²„íŠ¼ì˜ `aria-expanded` ì†ì„±ì´ `true` ë˜ëŠ” `false`ë¡œ í† ê¸€ë©ë‹ˆë‹¤.
- * // 2. ëŒ€ìƒ ìš”ì†Œ(`#content`)ì— `isExpanded` í´ëž˜ìŠ¤ê°€ ì¶”ê°€ë˜ê±°ë‚˜ ì œê±°ë©ë‹ˆë‹¤.
- * // 3. ì´ë¥¼ í†µí•´ ëŒ€ìƒ ìš”ì†Œì˜ í‘œì‹œ ìƒíƒœë¥¼ ì œì–´í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.
+ * // 작동 설명:
+ * // 버튼을 클릭하면:
+ * // 1. 버튼의 `aria-expanded` 속성이 `true` 또는 `false`로 토글됩니다.
+ * // 2. 대상 요소(`#content`)에 `isExpanded` 클래스가 추가되거나 제거됩니다.
+ * // 3. 이를 통해 대상 요소의 표시 상태를 제어할 수 있습니다.
  */
 function initAccessibleToggle(buttonSelector) {
     /**
      * @constant {HTMLElement|null} toggleBtn
-     * CSS ì„ íƒìžë¡œ ì°¾ì€ í† ê¸€ ë²„íŠ¼ ìš”ì†Œ.
-     * - ì§€ì •ëœ ë²„íŠ¼ì´ ì—†ì„ ê²½ìš° í•¨ìˆ˜ëŠ” ë™ìž‘í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
+     * CSS 선택자로 찾은 토글 버튼 요소.
+     * - 지정된 버튼이 없을 경우 함수는 동작하지 않습니다.
      */
     const toggleBtn = document.querySelector(buttonSelector);
 
-    // ë²„íŠ¼ì´ ì¡´ìž¬í•  ê²½ìš° í´ë¦­ ì´ë²¤íŠ¸ ì¶”ê°€
+    // 버튼이 존재할 경우 클릭 이벤트 추가
     toggleBtn?.addEventListener('click', () => {
         /**
          * @constant {string|null} controlsId
-         * `aria-controls` ì†ì„±ì— ì§€ì •ëœ ëŒ€ìƒ ìš”ì†Œì˜ ID.
+         * `aria-controls` 속성에 지정된 대상 요소의 ID.
          */
         const controlsId = toggleBtn.getAttribute('aria-controls');
 
         /**
          * @constant {HTMLElement|null} controlsEl
-         * `aria-controls`ë¡œ ì—°ê²°ëœ ëŒ€ìƒ ìš”ì†Œ.
+         * `aria-controls`로 연결된 대상 요소.
          */
         const controlsEl = document.getElementById(controlsId);
 
         /**
          * @constant {boolean} isExpanded
-         * ë²„íŠ¼ì˜ í˜„ìž¬ `aria-expanded` ìƒíƒœ (true/false).
+         * 버튼의 현재 `aria-expanded` 상태 (true/false).
          */
         const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
 
-        // ìƒíƒœ ë³€ê²½: aria-expanded ì†ì„± ë° í´ëž˜ìŠ¤ í† ê¸€
+        // 상태 변경: aria-expanded 속성 및 클래스 토글
         toggleBtn.setAttribute('aria-expanded', String(!isExpanded));
         controlsEl?.classList.toggle('isExpanded', !isExpanded);
     });

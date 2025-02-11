@@ -1,0 +1,25 @@
+<? include $_SERVER['DOCUMENT_ROOT'] . "/head.php"; ?>
+<? include $_SERVER['DOCUMENT_ROOT'] . "/inc/top.html"; ?>
+<? include $_SERVER['DOCUMENT_ROOT'] . "/inc/header.html"; ?>
+
+<div class="inr">
+    <div class="content_wrap">
+        <div class="title-group">
+            <p class="eng" lang="en" data-gnb-title="eng">&nbsp;</p>
+            <p class="title" data-gnb-title="1">문의하기</p>
+        </div> 
+        <section id="contact">
+            <!-- <div class="inr img_about" data-se="slide-up">
+                <img src="/images/content/visual-4.jpg" alt="인사말">
+            </div> -->
+            <div class="inr wrap_contact"  data-se="slide-up">
+                <? include_once $_SERVER['DOCUMENT_ROOT'] . "/online/online.php"; ?>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+
+<? include("inc_control.html") ?>
+<? include $_SERVER['DOCUMENT_ROOT'] . "/inc/footer.html"; ?>

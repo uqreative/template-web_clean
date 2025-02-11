@@ -1,0 +1,30 @@
+<? include $_SERVER['DOCUMENT_ROOT'] . "/head.php"; ?>
+<? include $_SERVER['DOCUMENT_ROOT'] . "/inc/top.html"; ?>
+<? include $_SERVER['DOCUMENT_ROOT'] . "/inc/header.html"; ?>
+
+<div class="inr">
+    <div class="content_wrap">
+        <div class="title-group">
+            <p class="eng" lang="en" data-gnb-title="eng">&nbsp;</p>
+            <!-- <p class="title" data-gnb-title="1">미국 <span>(FDA)</span></p> -->
+            <p class="title" data-gnb-title="1">&nbsp;</p>
+        </div> 
+        <div class="area_subTab" >
+            <ul class="tab_button">
+                <li class="on"><a href="/contents/07_board/board.html?board_id=board_notice" class="common-more">공지사항</a></li>
+                <li><a href="/contents/07_board/board.html?board_id=board_resource" class="common-more">자료실</a></li>
+            </ul>
+          </div>
+        <section id="board">
+            <!-- <div class="img_about"  data-se="slide-up">
+                <img src="/images/content/visual-4.jpg" alt="인사말">
+            </div> -->
+            <div class="inr wrap_board"  data-se="slide-up">
+                <? include_once  $_SERVER['DOCUMENT_ROOT'] . '/board/board.php'; ?>
+            </div>
+        </section>
+    </div>
+</div>
+
+<? include("inc_control.html") ?>
+<? include $_SERVER['DOCUMENT_ROOT'] . "/inc/footer.html"; ?>

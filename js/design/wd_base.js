@@ -45,7 +45,7 @@ function is_ie(){
 	var agent = navigator.userAgent.toLowerCase();
 	if (agent.indexOf("msie") > -1 || agent.indexOf("trident") > -1) {
 	  	$('body').addClass('ie');
-	  	$('body').append('<div id="update"><div>ë³´ê³ ê³„ì‹  ì‚¬ì´íŠ¸ëŠ” <b>ë§ˆì´í¬ë¡œì†Œí”„íŠ¸ ì—£ì§€ì— ìµœì í™” ëœ</b> ì‚¬ì´íŠ¸ ìž…ë‹ˆë‹¤. Windows Internet Explorerì—ì„œ <b>ì—…ë°ì´íŠ¸</b>ë¥¼ ë°›ìœ¼ì„¸ìš” <a href="https://www.microsoft.com/ko-kr/edge" target="_blank" title="ìƒˆì°½">Microsoft Edge ì—…ë°ì´íŠ¸í•˜ê¸°</a><p>í¬ë¡¬, ë„¤ì´ë²„ì›¨ì¼, ì˜¤íŽ˜ë¼, íŒŒì´ì–´í­ìŠ¤ ê¸°íƒ€ ë¸Œë¼ìš°ì €ë¡œë„ í™•ì¸ì´ ê°€ëŠ¥í•©ë‹ˆë‹¤.</div></div>');
+	  	$('body').append('<div id="update"><div>보고계신 사이트는 <b>마이크로소프트 엣지에 최적화 된</b> 사이트 입니다. Windows Internet Explorer에서 <b>업데이트</b>를 받으세요 <a href="https://www.microsoft.com/ko-kr/edge" target="_blank" title="새창">Microsoft Edge 업데이트하기</a><p>크롬, 네이버웨일, 오페라, 파이어폭스 기타 브라우저로도 확인이 가능합니다.</div></div>');
 	} else if ( agent.search( "edge/" ) > -1 ){
 		$('body').addClass('ie_edge');
 	}
@@ -91,12 +91,12 @@ function tableHover(){
 function tableScroll(){
 	if(!($('table.scroll').length > 0)) return;
 	$('table.scroll').wrap('<div class="scrollTable"></div>');
-	$('html[lang="ko"] .scrollTable').before('<p class="mob_info">ì¢Œìš°ë¡œ ìŠ¤í¬ë¡¤ í•˜ì‹œë©´ í™•ì¸ì´ ê°€ëŠ¥í•©ë‹ˆë‹¤.</p>');
+	$('html[lang="ko"] .scrollTable').before('<p class="mob_info">좌우로 스크롤 하시면 확인이 가능합니다.</p>');
 	$('html[lang="en"] .scrollTable').before('<p class="mob_info">You can check it by scrolling left and right.</p>');
-	$('html[lang="ja"] .scrollTable').before('<p class="mob_info">å·¦å³ã«ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã—ã¦ç¢ºèªã§ãã¾ã™ã€‚</p>');
-	$('html[lang="zh"] .scrollTable').before('<p class="mob_info">ä½ å¯ä»¥å·¦å³æ»šåŠ¨çœ‹ã€‚</p>');
+	$('html[lang="ja"] .scrollTable').before('<p class="mob_info">左右にスクロールして確認できます。</p>');
+	$('html[lang="zh"] .scrollTable').before('<p class="mob_info">你可以左右滚动看。</p>');
 	$('html[lang="th"] .scrollTable').before('<p class="mob_info">You can check it by scrolling left and right.</p>');
-	$('html[lang="ru"] .scrollTable').before('<p class="mob_info">Ð˜Ñ… Ð¼Ð¾Ð¶Ð½Ð¾ Ð¿Ñ€Ð¾ÐºÑ€ÑƒÑ‡Ð¸Ð²Ð°Ñ‚ÑŒ Ð²Ð»ÐµÐ²Ð¾.</p>');
+	$('html[lang="ru"] .scrollTable').before('<p class="mob_info">Их можно прокручивать влево.</p>');
 }
 
 //faq
@@ -264,7 +264,7 @@ function tooltip(){
 //layer popup
 function layerPop(){
 	if(!($('[data-pop-layer]').length > 0)) return;
-	$('[data-pop-layer] .popBox').append('<button type="button" class="btn_close"><span>ë ˆì´ì–´ë‹«ê¸°</span></button>');
+	$('[data-pop-layer] .popBox').append('<button type="button" class="btn_close"><span>레이어닫기</span></button>');
 	$('[data-pop-layer] .btn_close ,[data-pop-layer] .close').on('click',function(){
 		 $('[data-pop-layer] .popBox').parent('div').removeClass('active').fadeOut();
 		 //$('body').removeClass('active');
@@ -294,7 +294,7 @@ function showPopup(el){
 	return false;
 }
 
-//sitemap - ì‚­ì œì˜ˆì •
+//sitemap - 삭제예정
 $(window).on('load',function(){
 	if($('.area_sitemap').length > 0){
 		var gnbSite = $('#header nav').html();

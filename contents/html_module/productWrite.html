@@ -1,0 +1,112 @@
+<? include("../../inc/top.html") ?>
+<? include("../../inc/header.html") ?>
+
+	<h2 class="mt0">제품등록</h2>
+	<table class="bbsView">
+		<caption>제품등록</caption>
+		<colgroup>
+			<col style="width:15%"/>
+			<col style="width:35%"/>
+			<col style="width:15%"/>
+			<col style="width:35%"/>
+		</colgroup>
+		<tbody>
+			<tr>
+				<th scope="row">제품명</th>
+				<td><input type="text" name="" id="" class="inputFull"/></td>
+				<th scope="row">서브타이틀</th>
+				<td><input type="text" name="" id="" class="inputFull"/></td>
+			</tr>
+			<tr>
+				<th scope="row">가격</th>
+				<td colspan="3">
+					<input type="text" name="" id="" class="input100" placeholder="할인율%"/>
+					<input type="text" name="" id="" class="input150" placeholder="판매가격"/>
+					<input type="text" name="" id="" class="input150" placeholder="소비자가격"/>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">아이콘표시</th>
+				<td colspan="3">
+					<div class="designCheck">
+						<input type="checkbox" name="check01" id="check01" /><label for="check01">잉크무료</label>
+						<input type="checkbox" name="check04" id="check04" /><label for="check04">토너무료</label>
+						<input type="checkbox" name="check02" id="check02" /><label for="check02">당일설치</label>
+						<input type="checkbox" name="check03" id="check03" /><label for="check03">무상A/S</label>
+					</div>	
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">메인노출설정</th>
+				<td colspan="3">
+					<!-- 사용자의 사이트 별로 메인노출 구성은 달라지며 지정되는 갯수도 다름. -->
+					<div class="designCheck">
+						<input type="checkbox" name="main01" id="main01" /><label for="main01">인기상품</label>
+						<input type="checkbox" name="main01" id="main01" /><label for="main01">흑백&amp;컬러디지털 복합기</label>
+						<input type="checkbox" name="main01" id="main01" /><label for="main01">소형 프린터 복합기</label>
+						<input type="checkbox" name="main01" id="main01" /><label for="main01">컴퓨터&amp;3D프린터&amp;플로터</label>
+					</div>	
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">옵션설정<p style="font-size:13px; color:red;">최대4개까지 작성가능합니다</p></th>
+				<td colspan="3">
+					<div class="designRadio">
+						<input type="radio" name="option" id="option01" /><label for="option01">사용</label>
+						<input type="radio" name="option" id="option02" /><label for="option02">사용안함</label>
+					</div>
+					<!-- 직접입력 -->
+					<div style="margin-top:10px;">
+						<input type="text" name="" id="" class="input300" placeholder="1번 옵션명"/>, 
+						<input type="text" name="" id="" class="input100" placeholder="가격"/>원
+						<br/>
+						<input type="text" name="" id="" class="input300" placeholder="2번 옵션명"/>, 
+						<input type="text" name="" id="" class="input100" placeholder="가격"/>원
+						<br/>
+						<input type="text" name="" id="" class="input300" placeholder="3번 옵션명"/>, 
+						<input type="text" name="" id="" class="input100" placeholder="가격"/>원
+						<br/>
+						<input type="text" name="" id="" class="input300" placeholder="4번 옵션명"/>, 
+						<input type="text" name="" id="" class="input100" placeholder="가격"/>원
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">이미지등록<p style="font-size:13px; color:red;">맨처음 이미지가 대표이미지입니다</p></th>
+				<td colspan="3">
+					<div class="designFile">
+						<em>첨부파일</em>
+						<input type="text" readonly="readonly" value="">
+						<input type="file" name="fileUpload1" id="fileUpload1">
+						<label for="fileUpload1" class="btn">파일을 첨부해주세요.</label>
+					</div>
+					<div class="designFile">
+						<em>첨부파일</em>
+						<input type="text" readonly="readonly" value="">
+						<input type="file" name="fileUpload1" id="fileUpload1">
+						<label for="fileUpload1" class="btn">파일을 첨부해주세요.</label>
+					</div>
+					<div class="designFile">
+						<em>첨부파일</em>
+						<input type="text" readonly="readonly" value="">
+						<input type="file" name="fileUpload1" id="fileUpload1">
+						<label for="fileUpload1" class="btn">파일을 첨부해주세요.</label>
+					</div>
+					<div class="designFile">
+						<em>첨부파일</em>
+						<input type="text" readonly="readonly" value="">
+						<input type="file" name="fileUpload1" id="fileUpload1">
+						<label for="fileUpload1" class="btn">파일을 첨부해주세요.</label>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">제품상세</th>
+				<td colspan="3">
+					에디터
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+<? include("../../inc/footer.html") ?>

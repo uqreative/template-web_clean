@@ -1,0 +1,199 @@
+<? include("../../inc/top.html") ?>
+<? include("../../inc/header.html") ?>
+
+	<div class="productWrite area_calendar type02">		
+		<div class="calendar">
+			<div class="control">
+				<div>
+					<a href="#" class="btn_prev">이전달</a>
+					<p>2019.02</p>
+					<a href="#" class="btn_next">다음달</a>
+				</div>
+				<a href="#" class="btn_today">Today</a>
+			</div>
+			
+			<!-- 달력 -->
+			<div>
+				<!-- today표시 td class="today" 예약불가 class="none" 선택시 class="on" today일때 상관없이 none또는 on을 추가하면 해당 컬러가 반영됨 -->
+				<table>
+					<caption>일,월,화,수,목,금,토 요일별 정보를 제공하는 표</caption>
+					<thead>
+						<tr>	
+							<th scope="col" data-calendar="sun">일</th>
+							<th scope="col" data-calendar="mon">월</th>
+							<th scope="col" data-calendar="tue">화</th>
+							<th scope="col" data-calendar="web">수</th>
+							<th scope="col" data-calendar="thu">목</th>
+							<th scope="col" data-calendar="fri">금</th>
+							<th scope="col" data-calendar="sat">토</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td data-calendar="sun"></td>
+							<td data-calendar="mon"></td>
+							<td data-calendar="tue"></td>
+							<td data-calendar="web"></td>
+							<td data-calendar="thu"></td>
+							<td data-calendar="fri"><a href="#"><em>1</em></a></td>
+							<td data-calendar="sat"><a href="#"><em>2</em></a></td>
+						</tr>
+						<tr>
+							<td data-calendar="sun" class="none"><a href="javascript:;"><em>3</em></a></td>
+							<td data-calendar="mon" class="none"><a href="javascript:;"><em>4</em></a></td>
+							<td data-calendar="tue" class="none"><a href="javascript:;"><em>5</em></a></td>
+							<td data-calendar="web" class="on"><a href="#"><em>6</em></a></td>
+							<td data-calendar="thu" class="on"><a href="#"><em>7</em></a></td>
+							<td data-calendar="fri" class="on"><a href="#"><em>8</em></a></td>
+							<td data-calendar="sat"><a href="#"><em>9</em></a></td>
+						</tr>
+						<tr>
+							<td data-calendar="sun"><a href="#"><em>10</em></a></td>
+							<td data-calendar="mon" class="on"><a href="#"><em>11</em></a></td>
+							<td data-calendar="tue" class="none"><a href="javascript:;"><em>12</em></a></td>
+							<td data-calendar="web" class="none"><a href="javascript:;"><em>13</em></a></td>
+							<td data-calendar="thu" class="none"><a href="javascript:;"><em>14</em></a></td>
+							<td data-calendar="fri" class="none"><a href="javascript:;"><em>15</em></a></td>
+							<td data-calendar="sat"><a href="#"><em>16</em></a></td>
+						</tr>
+						<tr>
+							<td data-calendar="sun"><a href="#"><em>17</em></a></td>
+							<td data-calendar="mon" class="none"><a href="javascript:;"><em>18</em></a></td>
+							<td data-calendar="tue" class="today"><a href="javascript:;"><em>19</em></a></td>
+							<td data-calendar="web"><a href="#"><em>20</em></a></td>
+							<td data-calendar="thu" class="none"><a href="javascript:;"><em>21</em></a></td>
+							<td data-calendar="fri"><a href="#"><em>22</em></a></td>
+							<td data-calendar="sat"><a href="#"><em>23</em></a></td>
+						</tr>
+						<tr>
+							<td data-calendar="sun"><a href="#"><em>24</em></a></td>
+							<td data-calendar="mon"><a href="#"><em>25</em></a></td>
+							<td data-calendar="tue"><a href="#"><em>26</em></a></td>
+							<td data-calendar="web"><a href="#"><em>27</em></a></td>
+							<td data-calendar="thu"><a href="#"><em>28</em></a></td>
+							<td data-calendar="fri"></td>
+							<td data-calendar="sat"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			<p class="tip"><span>회색음영 날짜는 예약 불가</span> 한 날입니다. 달력에서 예약날짜를 선택하세요.</p>
+		</div>
+		<!-- //달력 -->
+		
+		<!-- 입력폼 -->
+		<table class="bbsView">
+			<caption>온라인폼</caption>
+			<colgroup>
+				<col data-write="th" style="width:15%">
+				<col data-write="td" style="width:85%">
+			</colgroup>
+			<tbody>
+				<!-- 제품명 표기 -->
+				<tr>
+					<th scope="row"><span class="marking">필수항목</span><label for="title">제품명</label></th>
+					<td>클리어아이 루테인</td>
+				</tr>
+				<tr>
+					<th scope="row"><span class="marking">필수항목</span><label for="name">이름</label></th>
+					<td>
+						<input type="text" name="name" id="name">
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><span class="marking">필수항목</span><label for="phone1">연락처</label></th>
+					<td class="tel">
+						<select name="phone1" id="phone1">
+							<option value="010">010</option>
+							<option value="011">011</option>
+							<option value="016">016</option>
+							<option value="017">017</option>
+							<option value="018">018</option>
+							<option value="019">019</option>
+						</select> - 
+						<input type="text" name="phone2" id="phone2" class="input100" value="" title="연락처"> - <input type="text" name="phone3" id="phone3" class="input100" value="" title="연락처">
+					</td>
+				</tr>
+				<tr>
+					<th scope="row" rowspan="3"><span class="marking">필수항목</span><label for="phone">주소</label></th>
+					<td class="address">
+						<input type="text" class="input200" name="zip" id="zip" value="">	
+						<a href="#" class="button white"><span>우편번호검색</span></a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" class="input400" name="address1" id="address1" value="">
+					</td>
+				</tr>	
+				<tr>
+					<td>
+						<input type="text" class="input400" name="address2" id="address1" value="">
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="email1">이메일</label></th>
+					<td class="mail">
+						<input type="text" name="email1" id="email1" value="" class="input200">
+						@
+						<select name="tmp_mail" id="tmp_mail">
+							<option value="">선택하세요</option>
+							<option value="naver.com">naver.com</option>
+							<option value="daum.net">daum.net</option>
+							<option value="hanmail.net">hanmail.net</option>
+							<option value="hotmail.com">hotmail.com</option>
+							<option value="gmail.com">gmail.com</option>
+							<option value="other">직접입력</option>
+						</select>
+						<input type="text" name="email2" value="" id="email2" class="input200">
+						<input type="hidden" name="email3" id="email3" value="">
+					</td>
+				</tr>
+				<!-- 연속허용 -->
+				<tr>
+					<th scope="row"><span class="marking">필수항목</span>예약날짜</th>
+					<td class="days">
+						<input type="text" name="" id="" value="2019.03.06" readonly title="시작날짜"/>
+						~
+						<input type="text" name="" id="" value="2019.03.08" readonly title="종료날짜"/>
+					</td>
+				</tr>
+				<!-- //연속허용 -->
+				<!-- 연속이 아닌경우 -->
+				<tr>
+					<th scope="row"><span class="marking">필수항목</span>예약날짜</th>
+					<td class="days">
+						<span>2019.03.06</span>
+						<span>2019.03.09</span>
+						<span>2019.03.11</span>
+					</td>
+				</tr>
+				<!-- //연속이 아닌경우 -->
+				<tr>
+					<th scope="row">내용</th>
+					<td>
+						<textarea name="" id="" class="inputFull">textarea제거하시고 에디터 넣으시면 됩니다.</textarea>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">첨부파일</th>
+					<td>
+						<div class="designFile">
+							<input type="text" readonly="readonly" value="">
+							<input type="file" name="fileUpload" id="fileUpload">
+							<label for="fileUpload" class="button white"><span>파일선택</span></label>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- //입력폼 -->
+	</div>
+	
+	<div class="btn_area">
+		<a href="#" class="button">예약완료</a>
+		<a href="#" class="button">제품목록</a>
+	</div>
+
+<? include("../../inc/footer.html") ?>

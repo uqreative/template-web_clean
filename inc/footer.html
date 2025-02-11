@@ -1,0 +1,39 @@
+			<? if(!($m_main_)){?>
+				</main>
+			</div>
+			<? } ?>
+			<footer id="footer">
+				<div class="inr">
+					<div class="btn-group">
+						<a href="/contents/01_about/sub01.html" class="btn">회사소개</a>
+						<a href="javascript:alert('준비중')" class="btn">이용안내</a>
+						<button type="button" onclick="javascript:showPopup(personal);" class="btn">개인정보처리방침</button>
+						<button type="button" onclick="javascript:showPopup(terms);" class="btn">이용약관</button>
+					</div>
+					<div class="info">
+						<address>
+							<!-- <span>회사명 : 세움파트너스</span> -->
+							<span>회사명 : 주식회사 세움파트너스</span>
+							<span>대표이사 : 김태형</span>
+							<span>사업자등록번호 : 560-86-02805</span>
+							<span>경남 사무실 : 경상남도 양산시 물금읍 부산대학로 49, 부산대학교 양산캠퍼스 첨단의생명융합센터 401호</span>
+							<span>경기 사무실 : 경기도 이천시 마장면 서이천로 578번길 74, HCT 3동 기업부설연구소</span>
+							<span>TEL : <a href="tel:055-381-7680">055-381-7680</a></span>
+							<span>FAX : 0303-0951-7680</span>
+							<span>E-MAIL : <a href="mailto:contacts@seumpartners.com">contacts@seumpartners.com</a></span>
+						</address>
+						<p class="copyright">COPYRIGHT © <em>AK INTERNATIONAL</em>. ALL RIGHTS RESERVED.</p>
+					</div>
+					<a href="#wrap" aria-label="위로 이동" title="위로 이동" class="scrollTop"></a>
+				</div>
+			</footer>
+			
+			<!-- 개인정보처리방침내용 -->
+			<? include $_SERVER['DOCUMENT_ROOT'] . "/inc/inc_personal.html"; ?>		
+
+			<!-- 이용약관 -->
+			<? include $_SERVER['DOCUMENT_ROOT'] . "/inc/inc_terms.html"; ?>
+
+		</div><!--// wrap-->
+	</body>
+</html>

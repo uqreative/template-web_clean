@@ -1,0 +1,54 @@
+<? include("../../inc/top.html") ?>
+<? include("../../inc/header.html") ?>
+
+	<h3 class="bbsTitle">KO매장 대구본점</h3>
+	<div class="bbsView dl">	
+		<dl class="col02">
+			<dt><span>전화번호</span></dt>
+			<dd>070-4567-1234</dd>
+			<dt><span>주차가능여부</span></dt>
+			<dd>전용주차공간 있음</dd>
+		</dl>
+		<dl class="col02">
+			<dt><span>영업시간</span></dt>
+			<dd>11:30 ~ 23:00</dd>
+			<dt><span>주소</span></dt>
+			<dd>대구광역시 수성구 동대구로12안길 10 136호</dd>
+		</dl>
+	</div>
+	<!-- 매장소개 -->
+	<div class="shopConts">
+		안녕하세요 KO매장 대구점은 언제나 만족을 드리기 위해 열심히 노력하고 있습니다.
+	</div>
+	
+	<h3>매장전경</h3>
+	<div class="shopPhoto">
+		<ul class="list">
+			<!-- 반복 -->
+			<li style="background-image:url(../../images/sample.jpg);"></li>
+			<!-- //반복 -->
+			<li style="background-image:url(../../images/sample.jpg);"></li>
+			<li style="background-image:url(../../images/module/bg_search.png);"></li>
+		</ul>
+	</div>
+	
+	<h3>찾아오시는 길</h3>
+	<div class="shopMap">
+		<!-- 지도삽입 -->
+		<div id="daumRoughmapContainer1544355564598" class="root_daum_roughmap root_daum_roughmap_landing" style="width:100%;"></div>
+		<script charset="UTF-8" class="daum_roughmap_loader_script" src="http://dmaps.daum.net/map_js_init/roughmapLoader.js"></script>
+		<script charset="UTF-8">
+			new daum.roughmap.Lander({
+				"timestamp" : "1544355564598",
+				"key" : "ra2n",
+				//"mapWidth" : "600",
+				"mapHeight" : "400"
+			}).render();
+		</script>
+		<!-- //지도삽입 -->
+		
+		<!-- 주소 -->
+		<p class="txt_map">대구광역시 수성구 동대구로12안길 10 136호</p>
+	</div>
+
+<? include("../../inc/footer.html") ?>

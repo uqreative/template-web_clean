@@ -1,0 +1,29 @@
+<? include("../../inc/top.html") ?>
+<? include("../../inc/header.html") ?>
+			
+	<!-- 내용 -->
+	<div class="area_namecheck">
+		<h2><i>본인인증</i></h2>
+		<p>본인인증은 한번만 하시면 창을 닫기 전까지는 본인인증 없이 계속 사용하실 수 있습니다.</p>
+		
+		<div class="inr">
+			<h3>휴대폰 인증</h3>
+			<div class="box">
+				<p>휴대전화를 통해 본인확인을 하는 서비스입니다. 입력하신 정보는 본인확인 절차를 위해서만 이용됩니다.</p>
+				<p class="red">공공장소에서 이용하고 계신다면 이용 후에는 실명도용에 노출될 수 있으니, 이용하시고 계신 브라우저를 반드시 닫아주십시오.</p>
+			</div>
+		</div>
+		<form method='post' action="/inc/namecheck.html" enctype='multipart/form-data'>
+			<input type="hidden" name="mode" value="" />
+			<input type="hidden" name="return_mode" value="" />
+			<!-- 버튼 -->
+			<div class="btn_area">
+				<a href="#" class="button lg red" onclick="name_check();">휴대폰인증</a>
+				<a href="#" class="button lg gray" onclick="history.go(-1);">메인으로</a>
+			</div>
+			<!-- //버튼 -->
+		</form>
+	</div>
+	<!-- //내용 -->
+			
+<? include("../../inc/footer.html") ?>

@@ -1,0 +1,200 @@
+<? include("../../inc/top.html") ?>
+<? include("../../inc/header.html") ?>
+		
+	<!-- 상세 -->
+	<!-- 제목 -->
+	<h3 class="bbsTitle"><em class="reply">답변</em><em>[홈페이지제작]</em>상시실기시험일자 일부변경알림</h3>
+	<table class="bbsView">
+		<caption>게시판 상세보기</caption>
+		<colgroup>
+			<col data-view="th" style="width:15%"/>
+			<col data-view="td" style="width:35%"/>
+			<col data-view="th" style="width:15%"/>
+			<col data-view="td" style="width:35%"/>
+		</colgroup>
+		<tbody>
+			<tr>
+				<th scope="row" data-view="date">작성일</th>
+				<td>2018-04-29</td>
+				<th scope="row" data-view="count">조회수</th>
+				<td>12</td>
+			</tr>
+			<tr>
+				<td colspan="4" class="conts">
+					<div class="conts">
+						<!-- 이미지 view단표시 -->
+						<div class="img">
+							<img src="../../images/sample.jpg" alt=""/>
+						</div>
+						<!-- //이미지 view단표시 -->
+						
+						<p>대구드론교육원에서 영천시 고경면에 양파밭과 마늘밭에 드론을 이용한 농약살포를 실시하였다.<br/>
+						대략 50,000㎡ 약15,000평 정도를 새벽 이슬 맞으며 도착해서 농부어르신과 농약관련 조율후 빵과 우유로 간단 식사 후 준비를 하여 오전9시경에 작업을 끝냈다. 
+						</p>
+						<p>					 
+						대구드론교육원 마늘밭 농약 살포<br/>
+						바람이 많이 불어 약 4m/s 가능한 드론의 고도를 1m 정도로 농약이 골고루 살포될 수 있도록 낮은 비행하며 적당한 속도로 살포하였다.<br/>
+						옆에서 지켜보던 동내 주민 농부께서도 대단하다고 훌륭하다고 하시며 만족하셨고 후일을 기약하셨다.
+						</p>
+					</div>
+				</td>
+			</tr>
+			<!-- 첨부파일이 있는경우 -->
+			<tr>
+				<th scope="row" data-view="file">첨부파일</th>
+				<td colspan="3">
+					<!-- 파일목록 -->
+					<ul class="list_file">
+						<li><a href="#">aaddggee.xls</a></li>
+						<li><a href="#">sample.pdf</a></li>
+					</ul>
+				</td>
+			</tr>
+			<!-- //첨부파일 -->
+		</tbody>
+	</table>
+	<!-- //상세 -->
+	
+	<!-- 댓글사용시 -->
+	<div class="comment_area">
+		<h4>댓글<span>2</span></h4>
+		<!-- 댓글작성 -->
+		<div class="write">
+			<div class="input">
+				<span>
+					<label for="comment_name">작성자</label>
+					<input type="text" name="comment_name" id="comment_name" value="">
+				</span>
+				
+				<span>
+					<label for="comment_pw">비밀번호</label>
+					<input type="password" name="comment_pw" id="comment_pw" value="">
+				</span>
+			</div>
+			<textarea name="comment" id="comment" title="댓글입력하기" placeholder="내용과 무관한 글은 임의로 삭제 될 수 있습니다."></textarea>
+			<div class="send">					
+				<a href="#" class="btn_submit">등록</a>
+			</div>
+		</div>
+		<!-- //댓글작성 -->
+		
+		<!-- 댓글목록 -->
+		<div class="list">
+			<ul>
+				<li>
+					<span class="name">홍길동</span>
+					<div class="btn">
+						<span class="date">2017-06-11</span>
+						<a href="#" class="btn_reply">댓글달기</a>
+						<a href="#" class="btn_del">삭제</a>
+					</div>
+					<p>미세먼지 해결 줌 해달라고 합시다. 중국 공장 굴뚝에 필터만 달아도 대기오염 50%로나 좋아진답니다. 일본은 공장굴뚝에 2중 3중으로 초 극세사 필터 달아서 분진이 제로에 가깝습니다. 중국은 굴뚝에서 나오는 분진이 99%로에 달합니다. 중국 공장 굴뚝에 제대로 필터 설치만해도 우리나라 마스크 안 써도 됩니다.</p>
+				</li>
+				<li>
+					<span class="name">홍길동</span>
+					<div class="btn">
+						<span class="date">2017-06-11</span>
+						<a href="#" class="btn_reply">댓글달기</a>
+						<a href="#" class="btn_del">삭제</a>
+					</div>
+					<p>미세먼지 해결 줌 해달라고 합시다. 중국 공장 굴뚝에 필터만 달아도 대기오염 50%로나 좋아진답니다. 일본은 공장굴뚝에 2중 3중으로 초 극세사 필터 달아서 분진이 제로에 가깝습니다. 중국은 굴뚝에서 나오는 분진이 99%로에 달합니다. 중국 공장 굴뚝에 제대로 필터 설치만해도 우리나라 마스크 안 써도 됩니다.</p>
+					
+					<!-- 댓글에 댓글 눌럿을때 -->
+					<div class="write reply_area">
+						<div class="input">
+							<span>
+								<label for="comment_name">작성자</label>
+								<input type="text" name="comment_name" id="comment_name" value="">
+							</span>
+							
+							<span>
+								<label for="comment_pw">비밀번호</label>
+								<input type="password" name="comment_pw" id="comment_pw" value="">
+							</span>
+						</div>
+						<textarea name="comment" id="comment" title="댓글입력하기" placeholder="내용과 무관한 글은 임의로 삭제 될 수 있습니다."></textarea>
+						<div class="send">					
+							<a href="#" class="btn_submit">등록</a>
+						</div>
+					</div>
+					<!-- //댓글에 댓글 눌럿을때 -->
+				</li>
+				<li>
+					<span class="name">정기준</span>
+					<div class="btn">
+						<span class="date">2017-06-11</span>
+						<a href="#" class="btn_reply">댓글달기</a>
+						<a href="#" class="btn_del">삭제</a>
+					</div>
+					<p>미세먼지 해결 줌 해달라고 합시다. 중국 공장 굴뚝에 필터만 달아도 대기오염 50%로나 좋아진답니다. 일본은 공장굴뚝에 2중 3중으로 초 극세사 필터 달아서 분진이 제로에 가깝습니다. 중국은 굴뚝에서 나오는 분진이 99%로에 달합니다. 중국 공장 굴뚝에 제대로 필터 설치만해도 우리나라 마스크 안 써도 됩니다.</p>
+				</li>
+				<li>
+					<!-- 댓글에 댓글일경우 나오는 이름 앞에 나오는 이름은 바로 전글작성자의 이름이면됨  -->
+					<span class="name">정기준님의 글에 대한 이시은님 댓글</span>
+					<div class="btn">
+						<span class="date">2017-06-11</span>
+						<a href="#" class="btn_reply">댓글달기</a>
+						<a href="#" class="btn_del">삭제</a>
+					</div>
+					<p>미세먼지 해결 줌 해달라고 합시다. 중국 공장 굴뚝에 필터만 달아도 대기오염 50%로나 좋아진답니다. 일본은 공장굴뚝에 2중 3중으로 초 극세사 필터 달아서 분진이 제로에 가깝습니다. 중국은 굴뚝에서 나오는 분진이 99%로에 달합니다. 중국 공장 굴뚝에 제대로 필터 설치만해도 우리나라 마스크 안 써도 됩니다.</p>
+				</li>
+				<li>
+					<!-- 댓글의 원글이 삭제되었 경우  -->
+					<span class="name">원문글이 삭제된 김현호님 댓글</span>
+					<div class="btn">
+						<span class="date">2017-06-11</span>
+						<a href="#" class="btn_reply">댓글달기</a>
+						<a href="#" class="btn_del">삭제</a>
+					</div>
+					<p>미세먼지 해결 줌 해달라고 합시다. 중국 공장 굴뚝에 필터만 달아도 대기오염 50%로나 좋아진답니다. 일본은 공장굴뚝에 2중 3중으로 초 극세사 필터 달아서 분진이 제로에 가깝습니다. 중국은 굴뚝에서 나오는 분진이 99%로에 달합니다. 중국 공장 굴뚝에 제대로 필터 설치만해도 우리나라 마스크 안 써도 됩니다.</p>
+				</li>
+				<li>		
+					<!-- 삭제눌럿을때 비번확인 -->
+					<div class="comment_password">
+						<p>작성시 설정한 비밀번호를 입력해주세요.</p>
+						<input type="password" name="" id=""/>
+						<a href="#" class="button">확인</a>
+						<a href="#" class="button gray">취소</a>
+					</div>				
+					<!-- //삭제눌럿을때 비번확인 -->				
+					<span class="name">홍길동</span>
+					<div class="btn">
+						<span class="date">2017-06-11</span>
+						<a href="#" class="btn_reply">댓글달기</a>
+						<a href="#" class="btn_del">삭제</a>
+					</div>
+					<p>미세먼지 해결 줌 해달라고 합시다. 중국 공장 굴뚝에 필터만 달아도 대기오염 50%로나 좋아진답니다. 일본은 공장굴뚝에 2중 3중으로 초 극세사 필터 달아서 분진이 제로에 가깝습니다. 중국은 굴뚝에서 나오는 분진이 99%로에 달합니다. 중국 공장 굴뚝에 제대로 필터 설치만해도 우리나라 마스크 안 써도 됩니다.</p>
+				</li>
+			</ul>
+		</div>
+		<!-- //댓글목록 -->
+	</div>
+	<!-- //댓글 -->
+	
+	<!-- 이전/다음 -->
+	<table class="bbsView page">
+		<caption>이전 다음 글보기</caption>
+		<colgroup>
+			<col data-view="th" style="width:15%"/>
+			<col data-view="td" style="width:85%"/>
+		</colgroup>
+		<tbody>
+			<tr>
+				<th scope="row">이전글</th>
+				<td><a href="#">이전글입니다.</a></td>
+			</tr>
+			<tr>
+				<th scope="row">다음글</th>
+				<td><a href="#">다음글 입니다.</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<!-- //이전/다음 -->
+	
+	<!-- 버튼 -->
+	<div class="btn_area">
+		<a href="#" class="button">목록</a>
+	</div>
+	<!-- //버튼 -->
+	
+<? include("../../inc/footer.html") ?>

@@ -1,0 +1,182 @@
+<?
+include_once  $_SERVER['DOCUMENT_ROOT'] . "/ko_admin/config_setup.php";
+include_once  $_SERVER['DOCUMENT_ROOT'] . "/ko_admin/auth_manager.php";
+?>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/ko_admin/js/billboard.css"/>
+<script type="text/javascript" src="/ko_admin/js/billboard.js"></script>
+<? 
+
+//시간대별
+$c_date = date("Y-m-d");
+if(!$sel_year) $sel_year = date("Y");
+if(!$sel_month) $sel_year = date("m");
+
+$query = "SELECT *, MAX(GREATEST(h_00,h_01,h_02,h_03,h_04,h_05,h_06,h_07,h_08,h_09,h_10,h_11,h_12,h_13,h_14,h_15,h_16,h_17,h_18,h_19,h_20,h_21,h_22,h_23)) AS max_val FROM koweb_statistics WHERE c_date = '$c_date'"; 
+$result = mysqli_query($dbp, $query);
+$row = mysqli_fetch_array($result);
+
+
+for($i = 0; $i < 24; $i++) {
+	if($i < 10) $num_ = "0".$i;
+	else $num_ = $i;
+	$nums_total += $row["h_".$num_];
+}
+?>
+
+
+<!-- 시간대별 -->
+<h2 class="mt0">시간별 접속 통계</h2>
+<div id="BubbleChart" style="height:450px;"></div>
+
+<table class="bbsList tac">
+	<thead>
+		<tr>
+			<th scope="col">시간</th>
+			<?=$th_total?>
+			<th scope="col">총계</th>
+		</tr>
+	</thead>
+	<tbody>	
+	<tr>
+		<td>시간별 접속수</td>
+		<?=$td_total?>
+		<td><?=number_format($nums_total)?></td>
+	</tr>
+	</tbody>
+</table>
+
+
+<!-- 일별 -->
+<h2>일자별 접속 통계</h2>
+<div id="BubbleChart3" style="height:450px;"></div>
+
+<script type="text/javascript">
+// Script
+var chart = bb.generate({
+  data: {
+	x : "x",
+    columns: [
+		["x", "00시", "01시", "02시", "03시", "04시", "05시", "06시", "07시", "08시", "09시", "10시", "11시", "12시", "13시", "14시", "15시", "16시", "17시", "18시", "19시","20시","21시","22시","23시"],
+		["방문자", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0,0],
+    ],
+	type: "bar"
+  },
+  axis: {
+    x: {
+      type: "category"
+    },
+    y: {
+      max: <?=$row[max_val] ?> + 10
+    }
+  },
+  bindto: "#BubbleChart"
+});
+
+setTimeout(function() {
+	chart.load({
+		columns: [
+			["방문자", "<?=$row[h_00]?>", "<?=$row[h_01]?>", "<?=$row[h_02]?>", "<?=$row[h_03]?>", "<?=$row[h_04]?>", "<?=$row[h_05]?>", "<?=$row[h_06]?>", "<?=$row[h_07]?>", "<?=$row[h_08]?>", "<?=$row[h_09]?>", "<?=$row[h_10]?>", "<?=$row[h_11]?>", "<?=$row[h_12]?>", "<?=$row[h_13]?>", "<?=$row[h_14]?>", "<?=$row[h_15]?>", "<?=$row[h_16]?>", "<?=$row[h_17]?>", "<?=$row[h_18]?>", "<?=$row[h_19]?>", "<?=$row[h_20]?>", "<?=$row[h_21]?>", "<?=$row[h_22]?>", "<?=$row[h_23]?>"],
+		]
+	});
+}, 700);
+
+
+</script>
+
+<? 
+	$c_date = date("Y-m-d");
+	if(!$sel_year) $sel_year = date("Y");
+	if(!$sel_month) $sel_year = date("m");
+
+	$query = "SELECT * FROM koweb_statistics WHERE c_date ORDER BY c_date DESC LIMIT 10"; 
+	$result = mysqli_query($dbp, $query);
+
+	//total
+	$total = array();
+
+	//date
+	$date = array();
+	
+	//출력되는 일자 중 제일 많은 방문자 수
+	$max_total_ = 0;
+
+	//총계
+	$nums_total = 0;
+
+	while($row = mysqli_fetch_array($result)){
+		array_push($date, $row[c_date]);
+		array_push($total, $row[day_total]);
+	}
+
+	foreach($date as $value){
+		$date_format .= "'".$value."',";
+		$th_total .= "<th>".$value."</th>";
+	}
+	foreach($total as $value) {
+		$total_ .= "'".$value."',";
+		$td_total .= "<td>".$value."</td>";
+		$nums_total += number_format($value);
+
+		if($max_total_ < $value) {
+			$max_total_ = $value;
+		}
+	}
+
+	$date_format = substr($date_format, 0, -1);
+	$total_ = substr($total_, 0, -1);
+?>
+
+<!-- Markup -->
+<script type="text/javascript">
+// Script OS별 접근 기록
+var chart2 = bb.generate({
+	data: {
+		x : "x",
+		columns: [
+			["x",<?=$date_format?> ],
+			["방문자", <?=$total_?>],
+		],
+		type: "bar"
+	},
+
+	axis: {
+		x: {
+		  type: "category"
+		},
+		y: {
+		  max: <?=$max_total_ ?> + 10
+		}
+	},
+	bindto: "#BubbleChart3"
+});
+
+
+setTimeout(function() {
+	chart2.load({
+		columns: [
+			["x",<?=$date_format?> ],
+			["방문자", <?=$total_?>],
+		]
+	});
+}, 1500);
+</script>
+
+
+
+<table class="bbsList tac">
+	<thead>
+		<tr>
+			<th scope="col">일자</th>
+			<?=$th_total?>
+			<th scope="col">총계</th>
+		</tr>
+	</thead>
+	<tbody>	
+		<tr>
+			<td>일자별 접속수</td>
+			<?=$td_total?>
+			<td><?=number_format($nums_total)?></td>
+		</tr>
+	</tbody>
+</table>

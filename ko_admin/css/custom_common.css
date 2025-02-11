@@ -1,0 +1,46 @@
+@charset "utf-8";
+
+/* 
+ * custom common
+ * 디자인 상쇄사용
+*/
+
+/* sub */
+.bbsView > tbody > tr > th{padding-left:20px;}
+.bbsView{border-top:2px solid;}
+.bbsView .button{height:40px; line-height:39px; font-size:14px;}
+.bbsSearch select{-webkit-border-radius:1rem; -webkit-appearance:none;}
+.datepicker{font-size:14px;}
+
+/* button */
+.btn_area{display:flex; flex-wrap:wrap; justify-content:center; align-items:center; width:100%; margin-top:40px; padding-bottom:30px;}
+.btn_area.flex{display:flex; justify-content:space-between; align-items:center;}
+.btn_area.right{justify-content:flex-end;}
+.button{display:inline-flex; justify-content:center; align-items:center; overflow:hidden; position:relative; min-width:100px; min-height:45px; box-sizing:border-box; padding:0 15px; margin:2px 1px; background:#222; border:1px solid #222; color:#fff !important; text-align:center; vertical-align:top; transition:all 0.4s ease-out 0.1s;}
+.button span{position:relative; z-index:2;}
+.button.red{background:#c40251; border:1px solid #c40251;}
+.button.blue{background:#2377d0; border:1px solid #1760ad;}
+.button.black{background:#2d2b2b; border:1px solid #1f1f1f;}
+.button.gray{background:#92999e; border:1px solid #92999e;}
+.button.white{background:#fff; border:1px solid #cdcdcd; color:#444 !important;}
+.button.lg{min-width:150px; min-height:50px; font-size:16px; letter-spacing:-1px;}
+.button.sm{min-width:60px; min-height:23px; padding:0 10px; font-size:12px;}
+.btn_area .button{min-height:45px;}
+.btn_area .button.sm{min-height:23px;}
+.btn_area .button.lg{min-height:50px;}
+table .button{min-height:33px;;}
+/* button hover */
+.button:before{content:''; display:block; position:absolute; top:0px; right:0px; bottom:0px; left:0px; z-index:1; width:120%; height:110%; background:#fff; transform:translateX(-120%) skew(-15deg); transition:transform 0.7s cubic-bezier(0, 0, 0.21, 0.87) 0s;}
+.button:hover:before,
+.button:focus:before{background:#fff; transform:translateX(-10%) skew(-15deg) perspective(500px);}
+.button:hover,
+.button:focus{color:#222 !important; box-shadow:0px 10px 15px rgba(0,0,0,0.15);}
+input.button:hover,
+input.button:focus{opacity:0.8; color:#fff !important;}
+label.button.white:hover,
+label.button.white:focus{color:#222 !important;}
+label.button.white:before{display:none;}
+
+/* 게시판수정 */
+.ko_board_list[data-type][data-gallery="A"] .control-btn{display:flex; align-items:center; justify-content:center; margin-top:10px; padding:5px; background:#f5f5f5;}
+.ko_board_list[data-type][data-gallery="A"] > li a.button{display:inline-flex; min-height:25px;}

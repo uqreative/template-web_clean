@@ -1,0 +1,157 @@
+<? include("../../inc/top.html") ?>
+<? include("../../inc/header.html") ?>
+
+	<!-- 검색 및 버튼 -->
+	<div class="search_bbs">
+		<!-- 검색 -->
+		<div class="search">
+			<select name="searchType" id="searchType">
+				<option value="">전체</option>
+				<option value="subject">제품명</option>
+			</select>
+			<input type="text" id="searchTxt" name="searchTxt" value="">
+			<input type="submit" class="button" value="검색">
+		</div>
+		<!-- //검색 -->
+		
+		<!-- 달력검색 -->
+		<div class="btn reserve">
+			<!-- 연속선택타입 -->
+			<div>
+				<input type="text" name="" id="" value="" data-form-type="datepicker" title="시작일"/>
+				<span>~</span>
+				<input type="text" name="" id="" value="" data-form-type="datepicker" title="종료일"/>
+				<a href="#" class="button white">날짜검색</a>
+			</div>
+			
+			<!-- 연속불가
+			<div>
+				<input type="text" name="" id="" value="" data-form-type="datepicker" title="예약일"/>
+				<a href="#" class="button white">날짜검색</a>
+			</div>
+			 -->
+		</div>
+		<!-- //달력검색 -->
+	</div>
+	<!-- 검색 및 버튼 -->
+
+	<!-- 목록 8개 표시 -->
+	<ul class="productList">
+		<!-- 반복 -->
+		<li>
+			<div>
+				<span class="img"><i style="background-image:url(../../images/sample.jpg);"></i></span>
+				<!-- 상태값 type01 ~ 04 -->
+				<i class="type01">예약가능</i>
+				<!-- 제품명 -->
+				<em>클리어아이 루테인</em>
+				<!-- 상태값 -->
+				<span class="btn">
+					<a href="reserveProductView.html">상세보기</a>
+					<a href="reserveProductWrite.html">예약하기</a>
+				</span>
+			</div>
+		</li>
+		<!-- //반복 -->
+		<li>
+			<div>
+				<span class="img"><i style="background-image:url(../../images/sample.jpg);"></i></span>
+				<i class="type02">예약불가</i>
+				<em>클리어아이 루테인</em>
+				<span class="btn">
+					<a href="reserveProductView.html">상세보기</a>
+					<a href="reserveProductWrite.html">예약하기</a>
+				</span>
+			</div>
+		</li>
+		<li>
+			<div>
+				<span class="img"><i style="background-image:url(../../images/sample.jpg);"></i></span>
+				<i class="type01">예약가능</i>
+				<em>에스와이무피로신 나잘연고</em>
+				<span class="btn">
+					<a href="reserveProductView.html">상세보기</a>
+					<a href="reserveProductWrite.html">예약하기</a>
+				</span>
+			</div>
+		</li>
+		<li>
+			<div>
+				<span class="img"><i style="background-image:url(../../images/sample.jpg);"></i></span>
+				<i class="type02">예약불가</i>
+				<em>에스와이무피로신 나잘연고</em>
+				<span class="btn">
+					<a href="reserveProductView.html">상세보기</a>
+					<a href="reserveProductWrite.html">예약하기</a>
+				</span>
+			</div>
+		</li>
+		<li>
+			<div>
+				<span class="img"><i style="background-image:url(../../images/sample.jpg);"></i></span>
+				<i class="type01">예약가능</i>
+				<em>에스와이무피로신 나잘연고 에스와이무피로신 에스와이무피로신</em>
+				<span class="btn">
+					<a href="reserveProductView.html">상세보기</a>
+					<a href="reserveProductWrite.html">예약하기</a>
+				</span>
+			</div>
+		</li>
+		<li>
+			<div>
+				<span class="img"><i style="background-image:url(../../images/sample.jpg);"></i></span>
+				<i class="type02">예약불가</i>
+				<em>에스와이무피로신 나잘연고</em>
+				<span class="btn">
+					<a href="reserveProductView.html">상세보기</a>
+					<a href="reserveProductWrite.html">예약하기</a>
+				</span>
+			</div>
+		</li>
+		<li>
+			<div>
+				<span class="img"><i style="background-image:url(../../images/sample.jpg);"></i></span>
+				<i class="type03">예약가능</i>
+				<em>에스와이무피로신 나잘연고</em>
+				<span class="btn">
+					<a href="reserveProductView.html">상세보기</a>
+					<a href="reserveProductWrite.html">예약하기</a>
+				</span>
+			</div>
+		</li>
+		<li>
+			<div>
+				<span class="img"><i style="background-image:url(../../images/sample.jpg);"></i></span>
+				<i class="type04">예약불가</i>
+				<em>에스와이무피로신 나잘연고</em>
+				<span class="btn">
+					<a href="reserveProductView.html">상세보기</a>
+					<a href="reserveProductWrite.html">예약하기</a>
+				</span>
+			</div>
+		</li>
+	</ul>
+	<!-- //목록 -->
+	
+	<!-- page -->
+	<div class="pagination">
+		<a href="#" class="btn_first">맨처음</a>
+		<a href="#" class="btn_prev">이전</a>
+		<!-- 선택된페이지 -->
+		<span>1</span>
+		<!-- //선택된페이지 -->
+		<a href="#">2</a>
+		<a href="#">3</a>
+		<a href="#">4</a>
+		<a href="#">5</a>
+		<a href="#">6</a>
+		<a href="#">7</a>
+		<a href="#">8</a>
+		<a href="#">9</a>
+		<a href="#">10</a>
+		<a href="#" class="btn_next">다음</a>
+		<a href="#" class="btn_last">맨마지막</a>
+	</div>
+	<!-- //page -->
+
+<? include("../../inc/footer.html") ?>

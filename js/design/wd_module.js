@@ -30,10 +30,10 @@ function treeUI(){
 				$(this).parent().removeClass('active');	
 				if($(this).parent().find('ul').length > 0){
 					$(this).parent().find('li').removeClass('active');
-					$(this).text('ì—´ê¸°');
+					$(this).text('열기');
 				}
 			}else{
-				$(this).text('ë‹«ê¸°');
+				$(this).text('닫기');
 				$(this).parent().addClass('active');
 			}
 		}else{
