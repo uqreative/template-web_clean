@@ -2,10 +2,14 @@
 	<div class="inr">
 		<h1 class="logo">
 			<a href="/" class="link" aria-label="첫 화면으로 이동" title="첫 화면으로 이동">
-				<img src="/images/common/logo.svg" alt="nama site" width="115" height="42" class="img">
-				<span class="visually-hidden">Nama Site</span>
+				<img src="/images/common/logo.svg" alt="<?=$site['og_site_name']?> 로고" width="115" height="42" class="img">
+				<span class="visually-hidden"><?=$site['og_site_name']?></span>
 			</a>
-		</h1> 
+		</h1>
+//		<?
+//			// data-visual-class 값이 서브 비주얼에 클래스로 추가됩니다.
+//			// 게시판, 온라인, 프로그램은 루트 경로가 아닌 콘텐츠 경로에 맞춰주세요.
+//		?>
 		<nav>
 			<ul class="gnb">
 				<li><a href="/contents/01_about/sub01.html" data-gnb="1" data-visual-class="about">회사소개</a>
@@ -54,6 +58,9 @@
 			</button>
 		</div>
 	</aside>
-</header> 
+</header>
+// <? if(!($m_main_)){?> 
+//	<? include $_SERVER['DOCUMENT_ROOT'] . "/inc/inc_visual_sub.html"; ?>
 	<div id="container">
-		<main id="content"> 
+		<main id="content">
+// <? } ?>

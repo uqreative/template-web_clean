@@ -1,6 +1,7 @@
-<? include  "./head.php";?>
-<? include $_SERVER['DOCUMENT_ROOT']."/inc/top.html"; ?>
-<? include $_SERVER['DOCUMENT_ROOT']."/inc/header.html"; ?>
+<?php  ".head.php"; ?> 
+<?php include $_SERVER['DOCUMENT_ROOT']."/inc/top.html"; ?> 
+<?php include $_SERVER['DOCUMENT_ROOT']."/inc/header.html"; ?> 
+
 <main id="content" class="main">
 	<section class="visual">
 		<div class="bg"></div>
@@ -272,5 +273,4 @@
 		</div>
 	</section>
 </main>
-<script class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
-<? include $_SERVER['DOCUMENT_ROOT']."/inc/footer.html"; ?>
+<?php include $_SERVER['DOCUMENT_ROOT']."/inc/footer.html"; ?> 

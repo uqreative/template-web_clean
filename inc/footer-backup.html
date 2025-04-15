@@ -1,6 +1,7 @@
- 
+//			<? if(!($m_main_)){?>
 				</main>
-			</div> 
+			</div>
+//			<? } ?>
 			<footer id="footer">
 				<div class="inr">
 					<div class="btn-group">
@@ -26,7 +27,13 @@
 					<a href="#wrap" aria-label="위로 이동" title="위로 이동" class="scrollTop"></a>
 				</div>
 			</footer>
-			 
+			
+			<!-- 개인정보처리방침내용 -->
+//			<? include $_SERVER['DOCUMENT_ROOT'] . "/inc/inc_personal.html"; ?>		
+
+			<!-- 이용약관 -->
+//			<? include $_SERVER['DOCUMENT_ROOT'] . "/inc/inc_terms.html"; ?>
+
 		</div><!--// wrap-->
 	</body>
 </html>
